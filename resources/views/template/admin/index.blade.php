@@ -215,12 +215,12 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="{{asset('template_admin')}}/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{auth()->user()->name}}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
+              <h6>{{auth()->user()->name}}</h6>
               <span>Web Designer</span>
             </li>
             <li>
@@ -304,10 +304,22 @@
           <span>Buku</span>
         </a>
       </li>
-
-
-
       <li class="nav-item">
+        <a class="nav-link @if(!request()->is('admin/user')) collapsed @endif" href="{{ url('admin/user') }}">
+          <i class="bi bi-arrow-bar-right"></i>
+          <span>Data Login</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link @if(!request()->is('admin/murid')) collapsed @endif" href="{{ url('admin/murid') }}">
+          <i class="bi bi-person"></i>
+          <span>Murid</span>
+        </a>
+      </li>
+
+
+
+      {{-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -318,20 +330,25 @@
             </a>
           </li>        
         </ul>
-      </li><!-- End Components Nav -->
+      </li> --}}
 
 
 
 
 
       <li class="nav-heading">Pages</li>
-
       <li class="nav-item">
+        <a class="nav-link @if(!request()->is('admin/pinjam_buku')) collapsed @endif" href="{{ url('admin/pinjam_buku') }}">
+          <i class="bi bi-archive"></i>
+          <span>Pinjam Buku</span>
+        </a>
+      </li>
+      {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="{{asset('template_admin')}}/users-profile.html">
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>
-      </li><!-- End Profile Page Nav -->
+      </li><!-- End Profile Page Nav --> --}}
 
     </ul>
 

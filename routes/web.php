@@ -20,10 +20,10 @@ Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->na
 Route::post('/login_post', [App\Http\Controllers\LoginController::class, 'authenticate']);
 Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout']);
 
-Route::get('/register', [App\Http\Controllers\registerController::class, 'index'])->middleware('guest');
-Route::post('/register', [App\Http\Controllers\registerController::class, 'store']);
+// Route::get('/register', [App\Http\Controllers\registerController::class, 'index'])->middleware('guest');
+// Route::post('/register', [App\Http\Controllers\registerController::class, 'store']);
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth','is_admin']], function () {
     Route::get('/admin/dashboard',[App\Http\Controllers\DashboardController::class,'index']);
 
     Route::get('admin/rak',[App\Http\Controllers\RakController::class,'index']);
@@ -45,6 +45,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('admin/buku/update/{id}',[App\Http\Controllers\BukuController::class,'update']);
     Route::get('admin/buku/destroy/{id}',[App\Http\Controllers\BukuController::class,'destroy']);
 
+    Route::get('admin/user',[App\Http\Controllers\UserController::class,'index']);
+    Route::post('admin/user/create',[App\Http\Controllers\UserController::class,'store']);
+    Route::get('admin/user/detail/{id}',[App\Http\Controllers\UserController::class,'show']);
+    Route::get('admin/user/edit/{id}',[App\Http\Controllers\UserController::class,'edit']);
+    Route::post('admin/user/update/{id}',[App\Http\Controllers\UserController::class,'update']);
+    Route::get('admin/user/destroy/{id}',[App\Http\Controllers\UserController::class,'destroy']);
 
 
+    Route::get('admin/murid',[App\Http\Controllers\MuridController::class,'index']);
+    Route::post('admin/murid/create',[App\Http\Controllers\MuridController::class,'store']);
+    Route::get('admin/murid/detail/{id}',[App\Http\Controllers\MuridController::class,'show']);
+    Route::get('admin/murid/edit/{id}',[App\Http\Controllers\MuridController::class,'edit']);
+    Route::post('admin/murid/update/{id}',[App\Http\Controllers\MuridController::class,'update']);
+    Route::get('admin/murid/destroy/{id}',[App\Http\Controllers\MuridController::class,'destroy']);
 });

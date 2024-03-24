@@ -328,7 +328,7 @@
       }
     }
     function PreviewEditSampulBuku() {
-      var input = document.getElementById('upload_gambar');
+      var input = document.getElementById('edit_sampul_buku');
       var preview = document.getElementById('preview_edit_sampul_buku');
   
       if (input.files && input.files[0]) {

@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::get('admin/pinjam_buku', [App\Http\Controllers\Api\PinjamBukuController::class, 'index']);
+Route::post('admin/pinjam_buku/create', [App\Http\Controllers\Api\PinjamBukuController::class, 'store']);
+Route::get('admin/pinjam_buku/show/{id}', [App\Http\Controllers\Api\PinjamBukuController::class, 'show']);
+Route::put('admin/pinjam_buku/update/{id}', [App\Http\Controllers\Api\PinjamBukuController::class, 'update']);
+Route::delete('admin/pinjam_buku/delete/{id}', [App\Http\Controllers\Api\PinjamBukuController::class, 'destroy']);

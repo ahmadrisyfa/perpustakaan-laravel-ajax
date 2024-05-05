@@ -228,31 +228,12 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="{{asset('template_admin')}}/users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="{{asset('template_admin')}}/users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="{{asset('template_admin')}}/pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
+            </li>                            
+            
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -368,7 +349,7 @@
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      Designed by <a href="{{url('/')}}">Perpustakaan</a>
     </div>
   </footer><!-- End Footer -->
 

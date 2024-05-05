@@ -20,8 +20,11 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('tanggal_lahir');
             $table->string('jenis_kelamin');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
         });
     }
 

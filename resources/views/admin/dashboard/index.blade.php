@@ -103,7 +103,7 @@
                         <i class="bi bi-archive"></i>
                         </div>
                         <div class="ps-3">
-                        <h6>67384</h6>
+                        <h6>{{$jumlah_pinjam_buku}}</h6>
                         </div>
                     </div>
                     </div>
@@ -120,7 +120,7 @@
                         <i class="bi bi-archive"></i>
                         </div>
                         <div class="ps-3">
-                        <h6>1244</h6>
+                        <h6>{{$jumlah_pinjam_buku_belum_di_kembalikan}}</h6>
                         </div>
                     </div>
                     </div>

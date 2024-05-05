@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -44,7 +45,10 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name'=> 'required|max:255',
             'is_admin' => 'required',
-            'email' => 'required|unique:users',
+            'email' => [
+                'required',
+                Rule::unique('users')->ignore($id),
+            ],
             'password'=>'required|min:5|max:255'
         ]);
  

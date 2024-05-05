@@ -23,9 +23,13 @@ return new class extends Migration
             $table->string('tahun');
             $table->string('sampul_buku');
             $table->integer('stok');
-            $table->integer('rak_id');            
-            $table->integer('category_id');
+            $table->unsignedBigInteger('rak_id');            
+            $table->unsignedBigInteger('category_id');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('rak_id')->references('id')->on('rak')->onDelete('CASCADE');
+            $table->foreign('category_id')->references('id')->on('category')->onDelete('CASCADE');
         });
     }
 

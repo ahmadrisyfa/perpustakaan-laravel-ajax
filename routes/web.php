@@ -37,6 +37,13 @@ Route::post('/register', [App\Http\Controllers\registerController::class, 'store
 
 // Route siswa
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('siswa/dashboard', [App\Http\Controllers\SiswaController::class, 'detail_siswa']);
+    Route::get('detail/siswa', [App\Http\Controllers\SiswaController::class, 'detail']);
+
+
+
+    Route::get('/siswa/daftar_pinjam', [App\Http\Controllers\SiswaController::class, 'daftar_pinjam']);
+    Route::get('list', [App\Http\Controllers\SiswaController::class, 'list']);
 });
 
 
@@ -80,6 +87,7 @@ Route::group(['middleware' => ['is_admin']], function () {
 });
 
 Route::get('admin/pinjam_buku', [App\Http\Controllers\PinjamBukuController::class, 'index']);
+Route::get('admin/pinjam_buku/show/{id}', [App\Http\Controllers\PinjamBukuController::class, 'show']);
 Route::post('admin/pinjam_buku/create', [App\Http\Controllers\PinjamBukuController::class, 'store']);
 Route::put('admin/pinjam_buku/update/{id}', [App\Http\Controllers\PinjamBukuController::class, 'update']);
 Route::delete('admin/pinjam_buku/delete/{id}', [App\Http\Controllers\PinjamBukuController::class, 'destroy']);

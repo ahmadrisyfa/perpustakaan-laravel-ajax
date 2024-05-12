@@ -22,6 +22,9 @@ return new class extends Migration
             $table->date('tanggal_di_kembalikan');
             $table->string('jumlah_denda')->default('0');
             $table->string('status')->default('0');
+            $table->string('status_di_kembalikan')->default('0');
+            $table->date('tanggal_pengembalian');
+
             $table->timestamps();
             $table->softDeletes();
 

@@ -77,7 +77,7 @@ class PinjamBukuController extends Controller
      */
     public function show($id)
     {
-        $data = PinjamBuku::find($id);
+        $data = PinjamBuku::with('buku', 'murid')->find($id);
         if ($data) {
             return response()->json([
                 'status' => true,

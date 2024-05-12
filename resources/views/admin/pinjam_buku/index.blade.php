@@ -92,12 +92,13 @@
                     @endif
                   </td>
                   <td>
-                    <a href="{{url('admin/pinjam_buku/edit/'.$value['id'])}}" data-bs-toggle="modal" data-bs-target="#EditModal{{$value['id']}}" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i>Edit</a>
-                    <form action="{{url('admin/pinjam_buku/delete/'.$value['id'])}}" method="POST" onsubmit="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?')" class="d-inline">
+                    {{-- <a href="{{url('admin/pinjam_buku/edit/'.$value['id'])}}" data-bs-toggle="modal" data-bs-target="#EditModal{{$value['id']}}" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i>Edit</a> --}}
+                    <a href="{{url('admin/pinjam_buku/show/'.$value['id'])}}" class="btn btn-info btn-sm"><i class="bi bi-eye"></i>Detail</a>
+                    {{-- <form action="{{url('admin/pinjam_buku/delete/'.$value['id'])}}" method="POST" onsubmit="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?')" class="d-inline">
                       @csrf
                       @method('delete')
                       <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i>Hapus</buttonhref=>
-                    </form>
+                    </form> --}}
                 </td>
             </tr> 
 

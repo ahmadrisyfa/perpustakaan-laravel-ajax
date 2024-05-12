@@ -28,7 +28,15 @@ class PinjamBukuController extends Controller
 
     public function show($id)
     {
-        $pinjam_buku = PinjamBuku::with('murid', 'buku')->findOrFail($id);
+        // $pinjam_buku = PinjamBuku::with('murid', 'buku')->findOrFail($id);
+        $pinjam_buku = new Client();
+        $url = "http://127.0.0.1:8001/api/admin/pinjam_buku/show/$id";
+        $response = $pinjam_buku->request('get', $url);
+        $content = $response->getBody()->getContents();
+        $contentArray = json_decode($content, true);
+        $pinjam_buku = $contentArray['data'];
+
+        return view('admin.pinjam_buku.show', ['pinjam_buku' => $pinjam_buku]);
     }
 
     public function store(Request $request)

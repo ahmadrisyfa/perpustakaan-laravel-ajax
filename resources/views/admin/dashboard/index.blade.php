@@ -111,7 +111,7 @@
             </div>
 
 
-            <div class="col-xxl-4 col-xl-12">
+            {{-- <div class="col-xxl-4 col-xl-12">
                 <div class="card info-card customers-card">                
                     <div class="card-body">
                     <h5 class="card-title">Data Pinjam Buku ( Belum Di Kembalikan ) <span>| Today</span></h5>
@@ -125,7 +125,7 @@
                     </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             
 

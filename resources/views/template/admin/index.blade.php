@@ -37,6 +37,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+    @yield('css_admin')
 </head>
 
 <body>
@@ -45,7 +46,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="{{url('admin/dashboard')}}" class="logo d-flex align-items-center">
+      <a href="#" class="logo d-flex align-items-center">
         <img src="{{asset('template_admin')}}/assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">Perpustakaan</span>
       </a>
@@ -261,6 +262,8 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
+
+      @if(auth()->user()->is_admin == 1)
       <li class="nav-item">
         <a class="nav-link @if(!request()->is('admin/dashboard')) collapsed @endif" href="{{url('admin/dashboard')}}">
           <i class="bi bi-grid"></i>
@@ -313,17 +316,35 @@
         </ul>
       </li> --}}
 
-
-
-
-
       <li class="nav-heading">Pages</li>
       <li class="nav-item">
         <a class="nav-link @if(!request()->is('admin/pinjam_buku')) collapsed @endif" href="{{ url('admin/pinjam_buku') }}">
-          <i class="bi bi-archive"></i>
-          <span>Pinjam Buku</span>
+          <i class="bi bi-arrow-90deg-right"></i>
+          <span>Peminjaman</span>
         </a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link @if(!request()->is('admin/pinjam_buku')) collapsed @endif" href="{{ url('admin/pinjam_buku') }}">
+          <i class="bi bi-arrow-90deg-left"></i>
+          <span>Pengembalian</span>
+        </a>
+      </li>
+      @else
+      <li class="nav-item">
+        <a class="nav-link @if(!request()->is('siswa/dashboard')) collapsed @endif" href="{{ url('siswa/dashboard') }}">
+          <i class="bi bi-person"></i>
+          <span>Detail Murid</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link @if(!request()->is('siswa/daftar_pinjam')) collapsed @endif" href="{{ url('siswa/daftar_pinjam') }}">
+          <i class="bi bi-archive"></i>
+          <span>Daftar Pinjam Buku</span>
+        </a>
+      </li>
+      @endif
       {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="{{asset('template_admin')}}/users-profile.html">
           <i class="bi bi-person"></i>

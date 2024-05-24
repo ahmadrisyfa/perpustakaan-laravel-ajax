@@ -40,8 +40,11 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-    Route::get('/siswa/daftar_pinjam', [App\Http\Controllers\SiswaController::class, 'daftar_pinjam']);
-    Route::get('list', [App\Http\Controllers\SiswaController::class, 'daftar_pinjam_buku_js']);
+    Route::get('siswa/daftar_pinjam_buku', [App\Http\Controllers\SiswaController::class, 'daftar_pinjam_buku']);
+    Route::get('daftar_pinjam_buku_js', [App\Http\Controllers\SiswaController::class, 'daftar_pinjam_buku_js']);
+
+    Route::get('siswa/daftar_pengembalian_buku', [App\Http\Controllers\SiswaController::class, 'daftar_pengembalian_buku']);
+    Route::get('daftar_pengembalian_buku_js', [App\Http\Controllers\SiswaController::class, 'daftar_pengembalian_buku_js']);
 });
 
 

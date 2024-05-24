@@ -23,7 +23,7 @@ class DendaController extends Controller
     {
         // $pengembalian_buku = PengembalianBuku::with('murid', 'buku')->findOrFail($id);
         $pengembalian_buku = new Client();
-        $url = "http://127.0.0.1:8001/api/admin/pengembalian_buku/show/$id";
+        $url =  env('URL_API') . "api/admin/pengembalian_buku/show/$id";
         $response = $pengembalian_buku->request('get', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);

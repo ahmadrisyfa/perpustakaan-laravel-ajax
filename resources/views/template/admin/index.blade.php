@@ -60,7 +60,7 @@
         <input type="text" name="query" placeholder="Search" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form> --}}
-      {{-- @include('waktu.index') --}}
+      @include('waktu.index')
     </div>
 
 
@@ -358,9 +358,17 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link @if(!request()->is('siswa/daftar_pinjam')) collapsed @endif" href="{{ url('siswa/daftar_pinjam') }}">
-          <i class="bi bi-archive"></i>
+        <a class="nav-link @if(!request()->is('siswa/daftar_pinjam_buku')) collapsed @endif" href="{{ url('siswa/daftar_pinjam_buku') }}">
+          <i class="bi bi-arrow-90deg-right"></i>
           <span>Daftar Pinjam Buku</span>
+        </a>
+      </li>
+
+      
+      <li class="nav-item">
+        <a class="nav-link @if(!request()->is('siswa/daftar_pengembalian_buku')) collapsed @endif" href="{{ url('siswa/daftar_pengembalian_buku') }}">
+          <i class="bi bi-arrow-90deg-left"></i>
+          <span>Daftar Pengembalian Buku</span>
         </a>
       </li>
       @endif

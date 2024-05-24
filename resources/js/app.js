@@ -2,6 +2,10 @@
 require('./bootstrap');
 
 //component
-require('./component/PeminjamanSiswa')
+require('./component/PeminjamanBuku')
+
+require('./component/PengembalianBuku')
+
 
 require('./component/DetailSiswa')
+

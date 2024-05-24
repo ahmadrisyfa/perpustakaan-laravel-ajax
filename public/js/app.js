@@ -2166,7 +2166,8 @@ module.exports = {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 //component
-__webpack_require__(/*! ./component/PeminjamanSiswa */ "./resources/js/component/PeminjamanSiswa.js");
+__webpack_require__(/*! ./component/PeminjamanBuku */ "./resources/js/component/PeminjamanBuku.js");
+__webpack_require__(/*! ./component/PengembalianBuku */ "./resources/js/component/PengembalianBuku.js");
 __webpack_require__(/*! ./component/DetailSiswa */ "./resources/js/component/DetailSiswa.js");
 
 /***/ }),
@@ -2338,16 +2339,16 @@ if (document.getElementById('DetailListSiswa')) {
 
 /***/ }),
 
-/***/ "./resources/js/component/PeminjamanSiswa.js":
-/*!***************************************************!*\
-  !*** ./resources/js/component/PeminjamanSiswa.js ***!
-  \***************************************************/
+/***/ "./resources/js/component/PeminjamanBuku.js":
+/*!**************************************************!*\
+  !*** ./resources/js/component/PeminjamanBuku.js ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   PeminjamanSiswa: () => (/* binding */ PeminjamanSiswa)
+/* harmony export */   PeminjamanBuku: () => (/* binding */ PeminjamanBuku)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -2372,22 +2373,22 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Objec
 
 
 
-var PeminjamanSiswa = /*#__PURE__*/function (_Component) {
-  function PeminjamanSiswa(props) {
+var PeminjamanBuku = /*#__PURE__*/function (_Component) {
+  function PeminjamanBuku(props) {
     var _this;
-    _classCallCheck(this, PeminjamanSiswa);
-    _this = _callSuper(this, PeminjamanSiswa, [props]);
+    _classCallCheck(this, PeminjamanBuku);
+    _this = _callSuper(this, PeminjamanBuku, [props]);
     _this.state = {
       books: []
     };
     return _this;
   }
-  _inherits(PeminjamanSiswa, _Component);
-  return _createClass(PeminjamanSiswa, [{
+  _inherits(PeminjamanBuku, _Component);
+  return _createClass(PeminjamanBuku, [{
     key: "loadData",
     value: function loadData() {
       var _this2 = this;
-      axios__WEBPACK_IMPORTED_MODULE_2___default().get('/list').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default().get('/daftar_pinjam_buku_js').then(function (response) {
         return _this2.setState({
           books: response.data.data
         });
@@ -2421,10 +2422,7 @@ var PeminjamanSiswa = /*#__PURE__*/function (_Component) {
                       children: "#"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
                       scope: "col",
-                      children: "Buddku"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                      scope: "col",
-                      children: "Murid"
+                      children: "Buku"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
                       scope: "col",
                       children: "Jumlah Pinjam"
@@ -2433,7 +2431,7 @@ var PeminjamanSiswa = /*#__PURE__*/function (_Component) {
                       children: "Tanggal Pinjam"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
                       scope: "col",
-                      children: "Tanggal Di Kembalikan"
+                      children: "Batas Di Kembalikan"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
                       scope: "col",
                       children: "Denda"
@@ -2444,25 +2442,17 @@ var PeminjamanSiswa = /*#__PURE__*/function (_Component) {
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {
                   children: this.state.books.map(function (item) {
-                    var overdueDays = 0;
-                    var today = new Date();
-                    var returnDate = new Date(item.tanggal_di_kembalikan);
-                    if (returnDate < today) {
-                      var diffTime = Math.abs(today.getTime() - returnDate.getTime());
-                      overdueDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                    }
-                    var penalty = overdueDays > 7 ? (overdueDays - 8) * 1000 : 0;
-                    var penaltyFormatted = penalty.toLocaleString('id-ID', {
-                      style: 'currency',
-                      currency: 'IDR'
-                    });
+                    var denda_per_hari = 1000;
+                    var tanggal_hari_ini = new Date().toLocaleDateString('en-CA'); // Mendapatkan tanggal hari ini dalam format 'yyyy-mm-dd'
+                    var tanggal_kembali = new Date(item.tanggal_di_kembalikan).toLocaleDateString('en-CA'); // Mendapatkan tanggal pengembalian buku dalam format 'yyyy-mm-dd'
+
+                    var selisih_hari = Math.ceil((new Date(tanggal_hari_ini) - new Date(tanggal_kembali)) / (1000 * 60 * 60 * 24));
+                    var denda = selisih_hari > 0 ? selisih_hari * denda_per_hari : 0;
                     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
                         children: rowNum++
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
                         children: item.buku.judul
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-                        children: item.murid.nama
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
                         children: item.jumlah_pinjam
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
@@ -2470,14 +2460,18 @@ var PeminjamanSiswa = /*#__PURE__*/function (_Component) {
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
                         children: item.tanggal_di_kembalikan
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-                        children: item.status == 1 ? "Tidak Ada Denda Yang Harus Di Bayar" : penaltyFormatted
+                        children: denda <= 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                          children: "Tidak Ada Denda Yang Harus Di Bayar"
+                        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+                          children: ["Rp. ", new Intl.NumberFormat('id-ID').format(denda)]
+                        })
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-                        children: item.status == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-                          className: "btn btn-success btn-sm",
-                          children: "Buku Sudah Di Kembalikan"
+                        children: denda > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                          "class": "btn btn-danger btn-sm",
+                          children: "Terlambat"
                         }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-                          className: "btn btn-danger btn-sm",
-                          children: "Buku Belum Di Kembalikan"
+                          "class": "btn btn-success btn-sm",
+                          children: "Normal"
                         })
                       })]
                     }, item.id);
@@ -2491,8 +2485,179 @@ var PeminjamanSiswa = /*#__PURE__*/function (_Component) {
     }
   }]);
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-if (document.getElementById('siswalist')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(PeminjamanSiswa, {}), document.getElementById('siswalist'));
+if (document.getElementById('daftar_pinjam_buku')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(PeminjamanBuku, {}), document.getElementById('daftar_pinjam_buku'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/component/PengembalianBuku.js":
+/*!****************************************************!*\
+  !*** ./resources/js/component/PengembalianBuku.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PengembalianBuku: () => (/* binding */ PengembalianBuku)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var PengembalianBuku = /*#__PURE__*/function (_Component) {
+  function PengembalianBuku(props) {
+    var _this;
+    _classCallCheck(this, PengembalianBuku);
+    _this = _callSuper(this, PengembalianBuku, [props]);
+    _this.state = {
+      books: []
+    };
+    return _this;
+  }
+  _inherits(PengembalianBuku, _Component);
+  return _createClass(PengembalianBuku, [{
+    key: "loadData",
+    value: function loadData() {
+      var _this2 = this;
+      axios__WEBPACK_IMPORTED_MODULE_2___default().get('/daftar_pengembalian_buku_js').then(function (response) {
+        return _this2.setState({
+          books: response.data.data
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.loadData();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var rowNum = 1; // Inisialisasi nomor urut
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "col-12",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "card recent-sales overflow-auto",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "card-body",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h5", {
+                className: "card-title",
+                children: "Daftar Buku Yang Sudah Di Kembalikan"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("table", {
+                className: "table table-borderless datatable",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("thead", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                      scope: "col",
+                      children: "#"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                      scope: "col",
+                      children: "Buku"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                      scope: "col",
+                      children: "Jumlah Pinjam"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                      scope: "col",
+                      children: "Tanggal Pinjam"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                      scope: "col",
+                      children: "Batas Di Kembalikan"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                      scope: "col",
+                      children: "Tanggal Pengembalian"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                      scope: "col",
+                      children: "Status"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                      scope: "col",
+                      children: "Denda Yang Sudah Di Bayar"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                      scope: "col",
+                      children: "Jumlah Denda"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                      scope: "col",
+                      children: "Sisa Denda"
+                    })]
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {
+                  children: this.state.books.map(function (item) {
+                    var created_at = new Date(item.created_at).toLocaleDateString('en-CA'); // Mengonversi created_at ke format 'yyyy-mm-dd'
+
+                    var denda_per_hari = 1000;
+                    var tanggal_hari_ini = new Date().toLocaleDateString('en-CA'); // Mendapatkan tanggal hari ini dalam format 'yyyy-mm-dd'
+                    var tanggal_kembali = new Date(item.tanggal_di_kembalikan).toLocaleDateString('en-CA'); // Mendapatkan tanggal pengembalian buku dalam format 'yyyy-mm-dd'
+
+                    var selisih_hari = Math.ceil((new Date(tanggal_hari_ini) - new Date(tanggal_kembali)) / (1000 * 60 * 60 * 24));
+                    var denda = selisih_hari > 0 ? selisih_hari * denda_per_hari : 0;
+                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                        children: rowNum++
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                        children: item.buku.judul
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                        children: item.jumlah_pinjam
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                        children: item.tanggal_pinjam
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                        children: item.tanggal_di_kembalikan
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                        style: {
+                          color: 'orange'
+                        },
+                        children: created_at
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                        children: item.jumlah_denda < denda ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                          "class": "btn btn-danger btn-sm",
+                          children: "Menunggak"
+                        }) :
+                        /*#__PURE__*/
+                        // <p>Rp. {new Intl.NumberFormat('id-ID').format(denda)}</p>
+                        (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                          "class": "btn btn-success btn-sm",
+                          children: "Selesai"
+                        })
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
+                        children: ["Rp. ", new Intl.NumberFormat('id-ID').format(item.jumlah_denda)]
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
+                        children: ["Rp. ", new Intl.NumberFormat('id-ID').format(denda)]
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
+                        children: ["Rp. ", new Intl.NumberFormat('id-ID').format(denda - item.jumlah_denda)]
+                      })]
+                    }, item.id);
+                  })
+                })]
+              })]
+            })
+          })
+        })
+      });
+    }
+  }]);
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+if (document.getElementById('daftar_pengembalian_buku')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(PengembalianBuku, {}), document.getElementById('daftar_pengembalian_buku'));
 }
 
 /***/ }),

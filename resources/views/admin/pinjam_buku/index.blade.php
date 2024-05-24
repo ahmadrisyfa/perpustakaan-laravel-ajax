@@ -80,8 +80,8 @@
                   @else
                     @if ($denda > 0)
                       <td>Rp. {{ number_format($denda, 0, ',', '.') }}</td>  
-                    @else    
-                      <td><p>Tidak Ada Denda Yang Harus Di Bayar</p></td>          
+                    {{-- @else    
+                      <td><p>Tidak Ada Denda Yang Harus Di Bayar</p></td>           --}}
                     @endif
                   @endif
                   <td>

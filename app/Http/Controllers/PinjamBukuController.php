@@ -15,7 +15,7 @@ class PinjamBukuController extends Controller
     {
 
         $pinjam_buku = new Client();
-        $url = "http://127.0.0.1:8001/api/admin/pinjam_buku";
+        $url =  env('URL_API') . "api/admin/pinjam_buku";
         $response = $pinjam_buku->request('GET', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);
@@ -33,7 +33,7 @@ class PinjamBukuController extends Controller
     {
         // $pinjam_buku = PinjamBuku::with('murid', 'buku')->findOrFail($id);
         $pinjam_buku = new Client();
-        $url = "http://127.0.0.1:8001/api/admin/pinjam_buku/show/$id";
+        $url =  env('URL_API') . "api/admin/pinjam_buku/show/$id";
         $response = $pinjam_buku->request('get', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);
@@ -67,7 +67,7 @@ class PinjamBukuController extends Controller
         ];
 
         $pinjam_buku = new Client();
-        $url = "http://127.0.0.1:8001/api/admin/pinjam_buku/create";
+        $url =  env('URL_API') . "api/admin/pinjam_buku/create";
         $response = $pinjam_buku->request('POST', $url, [
             'headers' => ['Content-type' => 'application/json'],
             'body' => json_encode($parameter)
@@ -109,7 +109,7 @@ class PinjamBukuController extends Controller
             ];
 
             $pinjam_buku = new Client();
-            $url = "http://127.0.0.1:8001/api/admin/pinjam_buku/update/$id";
+            $url =  env('URL_API') . "api/admin/pinjam_buku/update/$id";
             $response = $pinjam_buku->request('PUT', $url, [
                 'headers' => ['Content-type' => 'application/json'],
                 'body' => json_encode($parameter)
@@ -129,7 +129,7 @@ class PinjamBukuController extends Controller
     public function destroy($id)
     {
         $pinjam_buku = new Client();
-        $url = "http://127.0.0.1:8001/api/admin/pinjam_buku/delete/$id";
+        $url =  env('URL_API') . "api/admin/pinjam_buku/delete/$id";
         $response = $pinjam_buku->request('DELETE', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);

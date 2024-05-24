@@ -16,7 +16,8 @@ class PengembalianBukuController extends Controller
     {
 
         $pengembalian_buku = new Client();
-        $url = "http://127.0.0.1:8001/api/admin/pengembalian_buku";
+        $url = env('URL_API') . "api/admin/pengembalian_buku";
+
         $response = $pengembalian_buku->request('GET', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);
@@ -31,7 +32,7 @@ class PengembalianBukuController extends Controller
     {
         // $pengembalian_buku = PengembalianBuku::with('murid', 'buku')->findOrFail($id);
         $pengembalian_buku = new Client();
-        $url = "http://127.0.0.1:8001/api/admin/pengembalian_buku/show/$id";
+        $url =  env('URL_API') . "api/admin/pengembalian_buku/show/$id";
         $response = $pengembalian_buku->request('get', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);
@@ -74,7 +75,7 @@ class PengembalianBukuController extends Controller
         $pinjam_buku->update();
 
         $pengembalian_buku = new Client();
-        $url = "http://127.0.0.1:8001/api/admin/pengembalian_buku/create";
+        $url =  env('URL_API') . "api/admin/pengembalian_buku/create";
         $response = $pengembalian_buku->request('POST', $url, [
             'headers' => ['Content-type' => 'application/json'],
             'body' => json_encode($parameter)
@@ -116,7 +117,7 @@ class PengembalianBukuController extends Controller
             ];
 
             $pengembalian_buku = new Client();
-            $url = "http://127.0.0.1:8001/api/admin/pengembalian_buku/update/$id";
+            $url =  env('URL_API') . "api/admin/pengembalian_buku/update/$id";
             $response = $pengembalian_buku->request('PUT', $url, [
                 'headers' => ['Content-type' => 'application/json'],
                 'body' => json_encode($parameter)
@@ -136,7 +137,7 @@ class PengembalianBukuController extends Controller
     public function destroy($id)
     {
         $pengembalian_buku = new Client();
-        $url = "http://127.0.0.1:8001/api/admin/pengembalian_buku/delete/$id";
+        $url =  env('URL_API') . "api/admin/pengembalian_buku/delete/$id";
         $response = $pengembalian_buku->request('DELETE', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);
@@ -152,7 +153,7 @@ class PengembalianBukuController extends Controller
     public function bayar_denda($id)
     {
         $pengembalian_buku = new Client();
-        $url = "http://127.0.0.1:8001/api/admin/pengembalian_buku/show/$id";
+        $url =  env('URL_API') . "api/admin/pengembalian_buku/show/$id";
         $response = $pengembalian_buku->request('get', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);

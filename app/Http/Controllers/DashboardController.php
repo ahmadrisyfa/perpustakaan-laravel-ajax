@@ -15,7 +15,7 @@ class DashboardController extends Controller
     public function index()
     {
         $pinjam_buku = new Client();
-        $url = "http://127.0.0.1:8001/api/admin/pinjam_buku";
+        $url =  env('URL_API') . "api/admin/pinjam_buku";
         $response = $pinjam_buku->request('GET', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);

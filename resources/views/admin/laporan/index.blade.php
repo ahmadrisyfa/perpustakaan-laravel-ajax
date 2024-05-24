@@ -24,9 +24,9 @@
                     <form action="{{ url('admin/laporan/pinjam_buku') }}" method="POST" target="_blank">
                         @csrf
                         <div class="row">
-                            <div class="col-5"><input type="date" required name="start_date" class="form-control"></div>
-                            <div class="col-5"><input type="date" required name="end_date" class="form-control"></div>
-                            <div class="col-2">
+                            <div class="col-4"><input type="date" required name="start_date" class="form-control"></div>
+                            <div class="col-4"><input type="date" required name="end_date" class="form-control"></div>
+                            <div class="col-4">
                                 <button class="btn btn-success">Cetak</button>
                             </div>
                         </div>
@@ -44,9 +44,9 @@
                     <form action="{{ url('admin/laporan/pengembalian_buku') }}" method="POST" target="_blank">
                         @csrf
                         <div class="row">
-                            <div class="col-5"><input type="date" required name="start_date" class="form-control"></div>
-                            <div class="col-5"><input type="date" required name="end_date" class="form-control"></div>
-                            <div class="col-2">
+                            <div class="col-4"><input type="date" required name="start_date" class="form-control"></div>
+                            <div class="col-4"><input type="date" required name="end_date" class="form-control"></div>
+                            <div class="col-4">
                                 <button class="btn btn-warning">Cetak</button>
                             </div>
                         </div>
@@ -64,9 +64,9 @@
                     <form action="{{ url('admin/laporan/denda') }}" method="POST" target="_blank">
                         @csrf
                         <div class="row">
-                            <div class="col-5"><input type="date" required name="start_date" class="form-control"></div>
-                            <div class="col-5"><input type="date" required name="end_date" class="form-control"></div>
-                            <div class="col-2">
+                            <div class="col-4"><input type="date" required name="start_date" class="form-control"></div>
+                            <div class="col-4"><input type="date" required name="end_date" class="form-control"></div>
+                            <div class="col-4">
                                 <button class="btn btn-info">Cetak</button>
                             </div>
                         </div>

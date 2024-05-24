@@ -10,7 +10,9 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{asset('template_admin')}}/assets/img/favicon.png" rel="icon">
+  {{-- <link href="{{asset('template_admin')}}/assets/img/favicon.png" rel="icon"> --}}
+  <link rel="shortcut icon" href="{{asset('template-pinterest')}}/docs/assets/img/logo.png" type="image/x-icon">
+
   <link href="{{asset('template_admin')}}/img/favicon.ico" rel="icon">
 
   <link href="{{asset('template_admin')}}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -318,18 +320,35 @@
 
       <li class="nav-heading">Pages</li>
       <li class="nav-item">
-        <a class="nav-link @if(!request()->is('admin/pinjam_buku')) collapsed @endif" href="{{ url('admin/pinjam_buku') }}">
+        <a class="nav-link @if(!request()->is('admin/pinjam_buku/show/*') && !request()->is('admin/pinjam_buku')) collapsed @endif" href="{{ url('admin/pinjam_buku') }}">
           <i class="bi bi-arrow-90deg-right"></i>
           <span>Peminjaman</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link @if(!request()->is('admin/pinjam_buku')) collapsed @endif" href="{{ url('admin/pinjam_buku') }}">
+        <a class="nav-link @if(!request()->is('admin/pengembalian_buku/show/*') && !request()->is('admin/pengembalian_buku')) collapsed @endif" href="{{ url('admin/pengembalian_buku') }}">
           <i class="bi bi-arrow-90deg-left"></i>
           <span>Pengembalian</span>
         </a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link @if(!request()->is('admin/denda')) collapsed @endif" href="{{ url('admin/denda') }}">
+          <i class="bx bx-money"></i>
+          <span>Denda</span>
+        </a>
+      </li>
+
+
+      <li class="nav-heading">Laporan</li>
+      <li class="nav-item">
+        <a class="nav-link @if(!request()->is('admin/laporan')) collapsed @endif" href="{{ url('admin/laporan') }}">
+          <i class="bi bi-arrow-90deg-right"></i>
+          <span>Laporan</span>
+        </a>
+      </li>
+      
       @else
       <li class="nav-item">
         <a class="nav-link @if(!request()->is('siswa/dashboard')) collapsed @endif" href="{{ url('siswa/dashboard') }}">
@@ -345,12 +364,28 @@
         </a>
       </li>
       @endif
+      
+
+    
       {{-- <li class="nav-item">
-        <a class="nav-link collapsed" href="{{asset('template_admin')}}/users-profile.html">
-          <i class="bi bi-person"></i>
-          <span>Profile</span>
+        <a class="nav-link @if(!request()->is('admin/pinjam_buku/laporan')) collapsed @endif" href="{{ url('admin/pinjam_buku/laporan') }}">
+          <i class="bi bi-arrow-90deg-right"></i>
+          <span>Laporan Peminjaman</span>
         </a>
-      </li><!-- End Profile Page Nav --> --}}
+      </li>
+      <li class="nav-item">
+        <a class="nav-link @if(!request()->is('admin/pengembalian_buku/laporan')) collapsed @endif" href="{{ url('admin/pengembalian_buku/laporan') }}">
+          <i class="bi bi-arrow-90deg-left"></i>
+          <span>Laporan Pengembalian</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link @if(!request()->is('admin/denda/laporan')) collapsed @endif" href="{{ url('admin/denda/laporan') }}">
+          <i class="bx bx-money"></i>
+          <span>Laporan Denda</span>
+        </a>
+      </li> --}}
+
 
     </ul>
 

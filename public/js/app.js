@@ -2166,7 +2166,7 @@ module.exports = {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 //component
-__webpack_require__(/*! ./component/ListSiswa */ "./resources/js/component/ListSiswa.js");
+__webpack_require__(/*! ./component/PeminjamanSiswa */ "./resources/js/component/PeminjamanSiswa.js");
 __webpack_require__(/*! ./component/DetailSiswa */ "./resources/js/component/DetailSiswa.js");
 
 /***/ }),
@@ -2338,16 +2338,16 @@ if (document.getElementById('DetailListSiswa')) {
 
 /***/ }),
 
-/***/ "./resources/js/component/ListSiswa.js":
-/*!*********************************************!*\
-  !*** ./resources/js/component/ListSiswa.js ***!
-  \*********************************************/
+/***/ "./resources/js/component/PeminjamanSiswa.js":
+/*!***************************************************!*\
+  !*** ./resources/js/component/PeminjamanSiswa.js ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   ListSiswa: () => (/* binding */ ListSiswa)
+/* harmony export */   PeminjamanSiswa: () => (/* binding */ PeminjamanSiswa)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -2372,18 +2372,18 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Objec
 
 
 
-var ListSiswa = /*#__PURE__*/function (_Component) {
-  function ListSiswa(props) {
+var PeminjamanSiswa = /*#__PURE__*/function (_Component) {
+  function PeminjamanSiswa(props) {
     var _this;
-    _classCallCheck(this, ListSiswa);
-    _this = _callSuper(this, ListSiswa, [props]);
+    _classCallCheck(this, PeminjamanSiswa);
+    _this = _callSuper(this, PeminjamanSiswa, [props]);
     _this.state = {
       books: []
     };
     return _this;
   }
-  _inherits(ListSiswa, _Component);
-  return _createClass(ListSiswa, [{
+  _inherits(PeminjamanSiswa, _Component);
+  return _createClass(PeminjamanSiswa, [{
     key: "loadData",
     value: function loadData() {
       var _this2 = this;
@@ -2421,7 +2421,7 @@ var ListSiswa = /*#__PURE__*/function (_Component) {
                       children: "#"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
                       scope: "col",
-                      children: "Buku"
+                      children: "Buddku"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
                       scope: "col",
                       children: "Murid"
@@ -2492,7 +2492,7 @@ var ListSiswa = /*#__PURE__*/function (_Component) {
   }]);
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 if (document.getElementById('siswalist')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(ListSiswa, {}), document.getElementById('siswalist'));
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(PeminjamanSiswa, {}), document.getElementById('siswalist'));
 }
 
 /***/ }),

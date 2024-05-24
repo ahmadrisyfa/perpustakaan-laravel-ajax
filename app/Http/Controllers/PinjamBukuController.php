@@ -19,7 +19,10 @@ class PinjamBukuController extends Controller
         $response = $pinjam_buku->request('GET', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);
-        $pinjam_buku = $contentArray['data'];
+        // $pinjam_buku = $contentArray['data'];
+        $pinjam_buku = array_filter($contentArray['data'], function ($item) {
+            return $item['status'] == 0;
+        });
         $buku = Buku::get();
         $murid = Murid::get();
 

@@ -10,8 +10,9 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{asset('template_admin')}}/assets/img/favicon.png" rel="icon">
-  <link href="{{asset('template_admin')}}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  {{-- <link href="{{asset('template_admin')}}/assets/img/favicon.png" rel="icon"> --}}
+  {{-- <link href="{{asset('template_admin')}}/assets/img/apple-touch-icon.png" rel="apple-touch-icon"> --}}
+  <link rel="shortcut icon" href="{{asset('template-pinterest')}}/docs/assets/img/logo.png" type="image/x-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -98,7 +99,7 @@
                       <button class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
                     <div class="col-12">
-                      {{-- <p class="small mb-0">Don't have account? <a href="{{url('/register')}}">Create an account</a></p> --}}
+                      <p class="small mb-0">Ingin Melihat Data Buku? <a href="{{url('/')}}">Landing Page</a></p>
                     </div>
                   </form>
 

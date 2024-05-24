@@ -40,13 +40,16 @@
               <th scope="col">Murid</th>          
               <th scope="col">Jumlah Pinjam</th>             
               <th scope="col">Tanggal Pinjam</th>             
-              <th scope="col">Tanggal Di Kembalikan</th>             
+              <th scope="col">Batas Di Kembalikan</th>             
               <th scope="col">Denda</th>             
               <th scope="col">Status</th>             
               <th scope="col">Action</th>             
             </tr>
           </thead>
           <tbody>
+            @php
+            use Carbon\Carbon;
+            @endphp
             @foreach ($pinjam_buku as $value)                
             <tr>
                 <th scope="row">{{$loop->iteration}}</th>     
@@ -57,25 +60,22 @@
                 <td>{{$value['tanggal_di_kembalikan']}}</td>  
 
                 @php
-                    $tanggal_kembali = $value['tanggal_di_kembalikan'];
-                    $denda_per_hari = 1000;
+                    $denda_per_hari = 1000;                  
+                    $carbon_tanggal_hari_ini = \Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d');
 
-                    $tanggal_hari_ini = \Carbon\Carbon::now()->setTimezone('Asia/Jakarta'); // Mengubah zona waktu ke WIB
 
-                    // Memeriksa apakah tanggal pengembalian lebih besar dari tanggal hari ini atau tidak
-                    if ($tanggal_kembali > $tanggal_hari_ini) {
-                        $denda = 0; // Jika ya, maka denda = 0
+                    $tanggal_kembali = Carbon::parse($value['tanggal_di_kembalikan']); 
+                    $tanggal_hari_ini =  Carbon::parse($carbon_tanggal_hari_ini);
+
+                    if ($tanggal_kembali < $tanggal_hari_ini) {
+                      $selisih_hari = $tanggal_hari_ini->diffInDays($tanggal_kembali);
+                      $denda = $selisih_hari * $denda_per_hari;                      
                     } else {
-                        $selisih_hari = $tanggal_hari_ini->diffInDays($tanggal_kembali);
-
-                        $denda = 0;
-                        if ($selisih_hari > 7) {
-                            $denda = ($selisih_hari - 7) * $denda_per_hari;
-                        }
+                      $denda = 0; 
                     }
                 @endphp 
                    
-                  @if($value['status'] == 1)                      
+                  @if($denda <= 0)                      
                     <td><p>Tidak Ada Denda Yang Harus Di Bayar</p></td>          
                   @else
                     @if ($denda > 0)
@@ -85,10 +85,10 @@
                     @endif
                   @endif
                   <td>
-                    @if($value['status'] == 1)
-                      <button class="btn btn-success btn-sm">Buku Sudah Di Kembalikan</button>                                          
+                    @if ($denda > 0)
+                      <button class="btn btn-danger btn-sm">Terlambat</button>                                          
                     @else
-                      <button class="btn btn-danger btn-sm">Buku Belum Di Kembalikan</button>
+                      <button class="btn btn-success btn-sm">Normal</button>
                     @endif
                   </td>
                   <td>
@@ -97,12 +97,12 @@
                     {{-- <form action="{{url('admin/pinjam_buku/delete/'.$value['id'])}}" method="POST" onsubmit="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?')" class="d-inline">
                       @csrf
                       @method('delete')
-                      <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i>Hapus</buttonhref=>
+                      <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i>Hapus</button>
                     </form> --}}
                 </td>
             </tr> 
 
-            <div class="modal fade" id="EditModal{{$value['id']}}" tabindex="-1">
+            {{-- <div class="modal fade" id="EditModal{{$value['id']}}" tabindex="-1">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -153,23 +153,11 @@
                               <input type="date" class="form-control" name="tanggal_di_kembalikan" value="{{$value['tanggal_di_kembalikan']}}" required>
                             </div>
                           </div> 
-                          {{-- <div class="col-12">
-                            <label for="yourUsername" class="form-label">Jumlah Denda <br> <span style="color: yellowgreen">*jika tidak ada denda isikan 0</span></label>
-                            <div class="input-group has-validation"> --}}
+                         
                               <input type="hidden" readonly  class="form-control" name="jumlah_denda" value="{{$value['jumlah_denda']}}" required>
-                            {{-- </div>
-                          </div>    --}}
-                          <div class="col-12">
-                            <label for="yourUsername" class="form-label">Status</label>
-                            <div class="input-group has-validation">
-                              <select name="status" id="status" required class="form-select">
-                                <option value="" selected disabled style="text-align:center">-- Silahkan Pilih Status Pinjam Buku --</option>
-                                <option value="0" {{ $value['status'] == 0 ? 'selected' : '' }}>Belum Di Kembalikan</option>
-                                <option value="1" {{ $value['status'] == 1 ? 'selected' : '' }}>Sudah Di Kembalikan</option>
-
-                              </select>
-                            </div>
-                          </div> 
+                              <input type="hidden" readonly  class="form-control" name="status" value="{{$value['jumlah_denda']}}" required>
+                           
+                  
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save changes</button>
@@ -178,7 +166,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
             @endforeach
 
           </tbody>
@@ -190,7 +178,7 @@
   </div>
 
 
-
+  
   <div class="modal fade" id="createModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -232,31 +220,20 @@
                 <div class="col-12">
                   <label for="yourUsername" class="form-label">Tanggal Pinjam</label>
                   <div class="input-group has-validation">
-                    <input type="date" class="form-control" name="tanggal_pinjam" required>
-                  </div>
-                </div> 
-                <div class="col-12">
-                  <label for="yourUsername" class="form-label">Tanggal Di Kembalikan</label>
-                  <div class="input-group has-validation">
-                    <input type="date" class="form-control" name="tanggal_di_kembalikan" required>
+                    <input type="date" class="form-control" name="tanggal_pinjam" required onchange="setReturnDate()">
                   </div>
                 </div> 
                 {{-- <div class="col-12">
-                  <label for="yourUsername" class="form-label">Jumlah Denda <br> <span style="color: yellowgreen">*jika tidak ada denda isikan 0</span></label>
+                  <label for="yourUsername" class="form-label">Tanggal Di Kembalikan</label>
                   <div class="input-group has-validation"> --}}
-                    <input type="hidden" readonly class="form-control" name="jumlah_denda" value="0" required>
+                    <input type="hidden" class="form-control" name="tanggal_di_kembalikan" required>
                   {{-- </div>
-                </div>    --}}
-                <div class="col-12">
-                  <label for="yourUsername" class="form-label">Status</label>
-                  <div class="input-group has-validation">
-                    <select name="status" id="status" required class="form-select">
-                      <option value="" selected disabled style="text-align:center">-- Silahkan Pilih Status Pinjam Buku --</option>
-                      <option value="0">Belum Di Kembalikan</option>
-                      <option value="1">Sudah Di Kembalikan</option>
-                    </select>
-                  </div>
-                </div> 
+                </div>  --}}
+                
+                    <input type="hidden" readonly class="form-control" name="jumlah_denda" value="0" required>
+                    <input type="hidden" readonly class="form-control" name="status" value="0" required>
+
+               
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                   <button type="submit" class="btn btn-primary">Save changes</button>
@@ -267,92 +244,19 @@
     </div>
   </div>
 
-
   
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  {{-- <script>
-    $(document).ready(function() {
-        $("#createForm").submit(function(event) {
-            event.preventDefault();
-            var formData = new FormData();
-            formData.append("_token", "{{ csrf_token() }}");
-            formData.append("nama", $("#nama").val());
-            formData.append("lantai", $("#lantai").val());          
-            $.ajax({
-                url: '{{ url('admin/pinjam_buku/create') }}',
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    alert(response.message);
-                    location.reload();
-                },
-                error: function(xhr) {
-                    console.log(xhr.responseText);
-                }
-            });
-        });
-        $(document).on('click', '.edit-button', function(event) {
-            event.preventDefault();
-            var id = $(this).data('id');
-            $.ajax({
-                url: '{{ url('admin/pinjam_buku/edit') }}/' + id,
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                     $('#edit_id').val(data.id);
-                     $("#edit_nama").val(data.nama);
-                     $("#edit_lantai").val(data.lantai);
-                    },
-                error: function(xhr) {
-                    console.log(xhr.responseText);
-                }
-            });
-        });    
-        $("#editForm").submit(function(event) {
-            event.preventDefault();
-            var id = $('#edit_id').val();
-            var formData = new FormData();
-            formData.append("_token", "{{ csrf_token() }}");
-            formData.append("nama", $("#edit_nama").val());          
-            formData.append("lantai", $("#edit_lantai").val());          
-            $.ajax({
-                url: '{{ url('admin/pinjam_buku/update') }}/' + id,
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    alert(response.message);
-                    location.reload();
-                },
-                error: function(xhr) {
-                    console.log(xhr.responseText);
-                }
-            });
-        });
-        $(document).on('click', '.delete', function(event) {
-            event.preventDefault();
-            var id = $(this).data('id');
-            if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
-                $.ajax({
-                    url: '{{ url('admin/pinjam_buku/destroy') }}/' + id,
-                    type: 'get',
-                    data: {
-                        "_token": "{{ csrf_token() }}"
-                    },
-                    success: function(response) {
-                        alert(response.message);
-                        location.reload();
-                    },
-                    error: function(xhr) {
-                        console.log(xhr.responseText);
-                    }
-                });
-            }
-        });
-    });
-</script> --}}
+  <script>
+    function setReturnDate() {
+        let tanggalPinjam = document.querySelector('input[name="tanggal_pinjam"]').value;
+        if (tanggalPinjam) {
+            let tanggalPinjamDate = new Date(tanggalPinjam);
+            tanggalPinjamDate.setDate(tanggalPinjamDate.getDate() + 7);
+            let year = tanggalPinjamDate.getFullYear();
+            let month = (tanggalPinjamDate.getMonth() + 1).toString().padStart(2, '0');
+            let day = tanggalPinjamDate.getDate().toString().padStart(2, '0');
+            document.querySelector('input[name="tanggal_di_kembalikan"]').value = `${year}-${month}-${day}`;
+        }
+    }
+  </script>
+  
 @endsection

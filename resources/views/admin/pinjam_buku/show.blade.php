@@ -149,7 +149,49 @@
                     </div>
                   </div>                                          --}}
                 </div>
-    
+
+                <div>
+                  <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-4 col-form-label">
+                    
+
+                      <form action="{{url('admin/pengembalian_buku/create')}}" onsubmit="return confirm('Yakin Ingin Mengembalikan Buku Ini?')"   method="post">
+                        @csrf
+                        
+                        {{-- Untuk Update status tabel pinjam buku --}}
+                        <input type="hidden" name="id_pinjam_buku" value="{{$pinjam_buku['id']}}" >
+
+
+                        <input type="hidden" name="buku_id" value="{{$pinjam_buku['buku_id']}}" >
+                        <input type="hidden" name="murid_id" value="{{$pinjam_buku['murid_id']}}" >
+                        <input type="hidden" name="jumlah_pinjam" value="{{$pinjam_buku['jumlah_pinjam']}}" >
+                        <input type="hidden" name="tanggal_pinjam" value="{{$pinjam_buku['tanggal_pinjam']}}" >
+                        <input type="hidden" name="tanggal_di_kembalikan" value="{{$pinjam_buku['tanggal_di_kembalikan']}}" >
+                        <input type="hidden" name="jumlah_denda" value="0" >
+                        <input type="hidden" name="status" value="{{$pinjam_buku['status']}}" >
+
+                        <b>
+                          <button class="btn btn-primary"><i class="bi bi-arrow-90deg-left" style="margin-right: 5px"></i>Pengembalian Buku</button>
+                        </b>
+                      </form>
+                    </label>
+                    <div class="col-sm-4">                
+                    <b>
+                      <form action="{{url('admin/pinjam_buku/delete/'.$pinjam_buku['id'])}}" method="POST" onsubmit="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?')" class="d-inline">
+                        @csrf                                      
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger"><i class="bi bi-trash" style="margin-right: 5px"></i>Hapus</button>
+                      </form>
+                    </b>
+                    </div>
+                    <div class="col-sm-4">                
+                      <b>
+                        <a href="{{url('admin/pinjam_buku')}}" class="btn btn-info"><i class="bi bi-arrow-bar-right" style="margin-right: 5px"></i>kembali</a>
+                      </b>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>

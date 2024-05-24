@@ -10,7 +10,7 @@ class PinjamBuku extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = 'pinjam_buku';
-    protected $guarded = ['id'];
+    protected $guarded = [''];
 
     public function murid()
     {

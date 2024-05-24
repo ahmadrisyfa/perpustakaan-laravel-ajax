@@ -12,7 +12,7 @@ class MuridController extends Controller
     public function index()
     {
         $murid = Murid::get();
-        $user = User::get();
+        $user = User::where('is_admin',0)->get();
 
         return view('admin.murid.index',compact('murid','user'));
     }

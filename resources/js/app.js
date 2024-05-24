@@ -2,6 +2,6 @@
 require('./bootstrap');
 
 //component
-require('./component/ListSiswa')
+require('./component/PeminjamanSiswa')
 
 require('./component/DetailSiswa')

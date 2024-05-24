@@ -34,4 +34,31 @@ class DashboardController extends Controller
 
         return view('admin.dashboard.index', compact('rak', 'category', 'buku', 'user', 'murid', 'jumlah_pinjam_buku', 'jumlah_pinjam_buku_belum_di_kembalikan'));
     }
+
+    public function daftar_buku()
+    {
+        $buku = Buku::InRandomOrder()->get();
+        return view('daftar_buku.index',compact('buku'));
+    }
+    
+    public function daftar_buku_show($id)
+    {
+        $buku_detail = Buku::find($id);
+        $buku = Buku::InRandomOrder()->get();
+        return view('daftar_buku.show',compact('buku_detail','buku'));
+    }
+
+    public function daftar_buku_search(Request $request)
+    {
+        $search = $request->input('search');
+        $buku = Buku::where('judul', 'LIKE', "%{$search}%")
+                    ->orWhere('pengarang', 'LIKE', "%{$search}%")
+                    ->get();
+        return view('daftar_buku.index', compact('buku'));
+    }
+
+    public function landing_page()
+    {
+        return view('landing_page');
+    }
 }

@@ -14,36 +14,34 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    if (Auth::check()) {
-        if (Auth::user()->is_admin == 1) {
-            return redirect('/admin/dashboard');
-        } else {
-            return redirect('/user/dashboard');
-        }
-    } else {
-        return redirect('/login');
-    }
-});
+
 
 Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login_post', [App\Http\Controllers\LoginController::class, 'authenticate']);
 Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout']);
 
-Route::get('/register', [App\Http\Controllers\registerController::class, 'index'])->middleware('guest');
-Route::post('/register', [App\Http\Controllers\registerController::class, 'store']);
+// Route::get('/register', [App\Http\Controllers\registerController::class, 'index'])->middleware('guest');
+// Route::post('/register', [App\Http\Controllers\registerController::class, 'store']);
+
+
+Route::get('/', [App\Http\Controllers\DashboardController::class, 'landing_page']);
+Route::get('/daftar_buku', [App\Http\Controllers\DashboardController::class, 'daftar_buku']);
+Route::get('/daftar_buku/show/{id}', [App\Http\Controllers\DashboardController::class, 'daftar_buku_show']);
+Route::get('/daftar_buku/search', [App\Http\Controllers\DashboardController::class, 'daftar_buku_search']);
+
+
 
 
 
 // Route siswa
 Route::group(['middleware' => ['auth']], function () {
     Route::get('siswa/dashboard', [App\Http\Controllers\SiswaController::class, 'detail_siswa']);
-    Route::get('detail/siswa', [App\Http\Controllers\SiswaController::class, 'detail']);
+    Route::get('detail/siswa', [App\Http\Controllers\SiswaController::class, 'detail_siswa_js']);
 
 
 
     Route::get('/siswa/daftar_pinjam', [App\Http\Controllers\SiswaController::class, 'daftar_pinjam']);
-    Route::get('list', [App\Http\Controllers\SiswaController::class, 'list']);
+    Route::get('list', [App\Http\Controllers\SiswaController::class, 'daftar_pinjam_buku_js']);
 });
 
 
@@ -84,6 +82,20 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('admin/murid/edit/{id}', [App\Http\Controllers\MuridController::class, 'edit']);
     Route::post('admin/murid/update/{id}', [App\Http\Controllers\MuridController::class, 'update']);
     Route::get('admin/murid/destroy/{id}', [App\Http\Controllers\MuridController::class, 'destroy']);
+
+
+    
+    Route::get('admin/denda', [App\Http\Controllers\DendaController::class, 'index']);
+    Route::get('admin/denda/show/{id}', [App\Http\Controllers\DendaController::class, 'show']);
+    Route::post('admin/denda/update_jumlah_denda/{id}', [App\Http\Controllers\DendaController::class, 'update_jumlah_denda']);
+
+
+    Route::get('admin/laporan', [App\Http\Controllers\LaporanController::class, 'index']);
+    Route::post('admin/laporan/pinjam_buku', [App\Http\Controllers\LaporanController::class, 'pinjam_buku']);
+    Route::post('admin/laporan/pengembalian_buku', [App\Http\Controllers\LaporanController::class, 'pengembalian_buku']);
+    Route::post('admin/laporan/denda', [App\Http\Controllers\LaporanController::class, 'denda']);
+
+  
 });
 
 Route::get('admin/pinjam_buku', [App\Http\Controllers\PinjamBukuController::class, 'index']);
@@ -91,3 +103,16 @@ Route::get('admin/pinjam_buku/show/{id}', [App\Http\Controllers\PinjamBukuContro
 Route::post('admin/pinjam_buku/create', [App\Http\Controllers\PinjamBukuController::class, 'store']);
 Route::put('admin/pinjam_buku/update/{id}', [App\Http\Controllers\PinjamBukuController::class, 'update']);
 Route::delete('admin/pinjam_buku/delete/{id}', [App\Http\Controllers\PinjamBukuController::class, 'destroy']);
+
+
+Route::get('admin/pengembalian_buku', [App\Http\Controllers\PengembalianBukuController::class, 'index']);
+Route::get('admin/pengembalian_buku/show/{id}', [App\Http\Controllers\PengembalianBukuController::class, 'show']);
+Route::post('admin/pengembalian_buku/create', [App\Http\Controllers\PengembalianBukuController::class, 'store']);
+Route::put('admin/pengembalian_buku/update/{id}', [App\Http\Controllers\PengembalianBukuController::class, 'update']);
+Route::delete('admin/pengembalian_buku/delete/{id}', [App\Http\Controllers\PengembalianBukuController::class, 'destroy']);
+
+
+// bayar denda
+Route::get('admin/pengembalian_buku/bayar_denda/{id}', [App\Http\Controllers\PengembalianBukuController::class, 'bayar_denda']);
+Route::put('admin/pengembalian_buku/bayar_denda/{id}', [App\Http\Controllers\PengembalianBukuController::class, 'bayar_denda_proses']);
+

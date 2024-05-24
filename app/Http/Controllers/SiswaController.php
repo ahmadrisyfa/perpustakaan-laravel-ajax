@@ -16,7 +16,7 @@ class SiswaController extends Controller
         return view('siswa.detail');
     }
 
-    public function detail()
+    public function detail_siswa_js()
     {
         $data = Murid::where('user_id', auth()->user()->id)->with('user')->get();
         return response([
@@ -29,7 +29,7 @@ class SiswaController extends Controller
         return view('siswa.daftar_pinjam');
     }
 
-    public function list()
+    public function daftar_pinjam_buku_js()
     {
 
         // $pinjam_buku_client = new Client();

@@ -97,10 +97,10 @@
             <div class="col-xxl-4 col-md-4">
                 <div class="card info-card customers-card">                
                     <div class="card-body">
-                    <h5 class="card-title">Data Pinjam <span>| Today</span></h5>
+                    <h5 class="card-title">Data Pinjam Buku <span>| Today</span></h5>
                     <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="bi bi-archive"></i>
+                        <i class="bi bi-arrow-90deg-right"></i>
                         </div>
                         <div class="ps-3">
                         <h6>{{$jumlah_pinjam_buku}}</h6>
@@ -111,10 +111,26 @@
             </div>
 
 
-            {{-- <div class="col-xxl-4 col-xl-12">
-                <div class="card info-card customers-card">                
+            <div class="col-xxl-6 col-xl-6">
+                <div class="card info-card revenue-card">                
                     <div class="card-body">
-                    <h5 class="card-title">Data Pinjam Buku ( Belum Di Kembalikan ) <span>| Today</span></h5>
+                    <h5 class="card-title">Data Pengembalian Buku <span>| Today</span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-arrow-90deg-left"></i>
+                        </div>
+                        <div class="ps-3">
+                        <h6>{{$jumlah_pengembalian_buku}}</h6>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-6 col-xl-6">
+                <div class="card info-card sales-card">                
+                    <div class="card-body">
+                    <h5 class="card-title">Data Pinjam Buku (Belum Di Kembalikan)<span>| Today</span></h5>
                     <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                         <i class="bi bi-archive"></i>
@@ -125,7 +141,7 @@
                     </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
             
 

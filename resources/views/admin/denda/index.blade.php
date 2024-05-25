@@ -171,7 +171,7 @@
                               $notifikasi_pembayaran = $denda - $value['jumlah_denda'];
                           @endphp       
 
-                          @if ($value['jumlah_denda'] = $denda)
+                          @if ($value['jumlah_denda'] == $denda)
                             <tr>
                                 {{-- <th scope="row">{{$loop->iteration}}</th>      --}}
                                 <td>{{ $value['buku']['judul'] }}</td>

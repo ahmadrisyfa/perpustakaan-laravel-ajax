@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 24, 2024 at 01:32 PM
+-- Generation Time: May 25, 2024 at 08:51 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -252,7 +252,7 @@ INSERT INTO `pinjam_buku` (`id`, `buku_id`, `murid_id`, `jumlah_pinjam`, `tangga
 (18, 11, 1, '77', '2002-11-14', '2002-11-21', '0', '1', '2024-05-23 13:33:32', '2024-05-23 13:34:18', NULL),
 (19, 11, 1, '42', '2024-05-24', '2024-05-31', '0', '1', '2024-05-23 13:33:42', '2024-05-23 13:34:30', NULL),
 (20, 13, 3, '77', '2024-05-01', '2024-05-08', '0', '1', '2024-05-23 14:16:19', '2024-05-23 14:16:26', NULL),
-(21, 1, 2, '90', '2024-05-24', '2024-05-31', '0', '0', '2024-05-23 14:34:36', '2024-05-23 14:34:36', NULL);
+(21, 1, 2, '90', '2024-05-24', '2024-05-31', '0', '0', '2024-05-23 14:34:36', '2024-05-24 12:36:03', NULL);
 
 -- --------------------------------------------------------
 
@@ -427,7 +427,7 @@ ALTER TABLE `murid`
 -- AUTO_INCREMENT for table `pengembalian_buku`
 --
 ALTER TABLE `pengembalian_buku`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -439,7 +439,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `pinjam_buku`
 --
 ALTER TABLE `pinjam_buku`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `rak`

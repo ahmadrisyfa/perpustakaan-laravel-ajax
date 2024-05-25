@@ -26,13 +26,25 @@ class DashboardController extends Controller
             return $buku['status'] == 0;
         }));
 
+
+
+        $pengembalian_buku = new Client();
+        $url_pengembalian_buku =  env('URL_API') . "api/admin/pengembalian_buku";
+        $response_pengembalian_buku = $pengembalian_buku->request('GET', $url_pengembalian_buku);
+        $content_pengembalian_buku = $response_pengembalian_buku->getBody()->getContents();
+        $content_pengembalian_bukuArray = json_decode($content_pengembalian_buku, true);
+        $pengembalian_buku = $content_pengembalian_bukuArray['data'];
+        $jumlah_pengembalian_buku = count($pengembalian_buku);
+      
+
+
         $rak = Rak::count();
         $category = Category::count();
         $buku = Buku::count();
         $user = User::count();
         $murid = Murid::count();
-
-        return view('admin.dashboard.index', compact('rak', 'category', 'buku', 'user', 'murid', 'jumlah_pinjam_buku', 'jumlah_pinjam_buku_belum_di_kembalikan'));
+        
+        return view('admin.dashboard.index', compact('rak', 'category', 'buku', 'user', 'murid','jumlah_pinjam_buku','jumlah_pinjam_buku_belum_di_kembalikan','jumlah_pengembalian_buku'));
     }
 
     public function daftar_buku()

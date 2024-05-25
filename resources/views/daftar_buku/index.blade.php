@@ -59,7 +59,7 @@
 				<button class="navbar-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExplore" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				<div class="collapse navbar-collapse" id="navbarsExplore">
+				<div class="collapse navbar-collapse {{ request('search') ? 'show' : '' }}" id="navbarsExplore">
 					<ul class="navbar-nav">
 						<li class="nav-item">    				
 							<form action="{{ url('daftar_buku/search') }}" method="GET">

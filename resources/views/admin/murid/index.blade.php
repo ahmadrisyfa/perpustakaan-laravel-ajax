@@ -77,7 +77,7 @@
                 <div class="col-12">
                   <label for="yourUsername" class="form-label">No Telepon</label>
                   <div class="input-group has-validation">
-                    <input type="text" class="form-control" id="no_telepon" required>
+                    <input type="number" class="form-control" id="no_telepon" required>
                   </div>
                 </div>  
                 <div class="col-12">
@@ -150,7 +150,7 @@
                   <div class="col-12">
                     <label for="yourUsername" class="form-label">No Telepon</label>
                     <div class="input-group has-validation">
-                      <input type="text" class="form-control" id="edit_no_telepon" required>
+                      <input type="number" class="form-control" id="edit_no_telepon" required>
                     </div>
                   </div>  
                   <div class="col-12">

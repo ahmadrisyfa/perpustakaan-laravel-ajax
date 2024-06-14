@@ -17,11 +17,12 @@ return new class extends Migration
             $table->id();
             // $table->string('slug');
             $table->string('judul');
-            $table->string('pengarang');
-            $table->string('penerbit');
-            $table->string('isbn');
-            $table->string('tahun');
+            $table->string('pengarang')->nullable();
+            $table->string('penerbit')->nullable();
+            $table->string('isbn')->nullable();
+            $table->string('tahun')->nullable();
             $table->string('sampul_buku');
+            $table->string('sampul_buku_belakang');
             $table->integer('stok');
             $table->unsignedBigInteger('rak_id');            
             $table->unsignedBigInteger('category_id');

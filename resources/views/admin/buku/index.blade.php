@@ -25,7 +25,8 @@
               <th scope="col">Judul</th>
               <th scope="col">Pengarang</th>          
               <th scope="col">Penerbit</th>             
-              <th scope="col">Sampul Buku</th>                                  
+              <th scope="col">Sampul Buku Depan</th>                                  
+              <th scope="col">Sampul Buku Belakang</th>                                  
               <th scope="col">Action</th>             
 
             </tr>
@@ -37,7 +38,8 @@
                 <td>{{$value->judul}}</td>  
                 <td>{{$value->pengarang}}</td>  
                 <td>{{$value->penerbit}}</td>                 
-                <td><img src="{{asset('storage/' . $value->sampul_buku) }}" style="width: 150px"></td>                     
+                <td><img src="{{asset('storage/' . $value->sampul_buku) }}" style="width: 150px"></td>   
+                <td><img src="{{asset('storage/' . $value->sampul_buku_belakang) }}" style="width: 150px"></td>                     
                 <td>
                   <button class="btn btn-sm btn-primary detail-button"  data-id="{{ $value->id }}" data-bs-toggle="modal"
                     data-bs-target="#detailModal"><i class="bi bi-eye"></i> Detail</button>
@@ -76,33 +78,41 @@
                 <div class="col-12">
                   <label for="yourUsername" class="form-label">Pengarang</label>
                   <div class="input-group has-validation">
-                    <input type="text" class="form-control" id="pengarang" required>
+                    <input type="text" class="form-control" id="pengarang" >
                   </div>
                 </div> 
                 <div class="col-12">
                   <label for="yourUsername" class="form-label">Penerbit</label>
                   <div class="input-group has-validation">
-                    <input type="text" class="form-control" id="penerbit" required>
+                    <input type="text" class="form-control" id="penerbit" >
                   </div>
                 </div>     
                 <div class="col-12">
                   <label for="yourUsername" class="form-label">Isbn</label>
                   <div class="input-group has-validation">
-                    <input type="number" class="form-control" id="isbn" required>
+                    <input type="number" class="form-control" id="isbn" >
                   </div>
                 </div>  
                 <div class="col-12">
                   <label for="yourUsername" class="form-label">Tahun</label>
                   <div class="input-group has-validation">
-                    <input type="number" class="form-control" id="tahun" required>
+                    <input type="number" class="form-control" id="tahun" >
                   </div>
                 </div>  
                 <div class="col-12">
                   <img id="preview_sampul_buku" src="#" alt="preview sampul buku" style="display: none;width: 250px; height: auto;margin-top:10px;">
                 </div>
                 <div class="col-12">
-                  <label for="inputPassword4" class="form-label">Sampul Buku</label>
+                  <label for="inputPassword4" class="form-label">Sampul Buku Depan</label>
                   <input type="file" required class="form-control" onchange="previewSampulBuku()" id="sampul_buku">
+                </div>
+
+                <div class="col-12">
+                  <img id="preview_sampul_buku_belakang" src="#" alt="preview sampul buku belakang" style="display: none;width: 250px; height: auto;margin-top:10px;">
+                </div>
+                <div class="col-12">
+                  <label for="inputPassword4" class="form-label">Sampul Buku Belakang</label>
+                  <input type="file" required class="form-control" onchange="previewSampulBukuBelakang()" id="sampul_buku_belakang">
                 </div>
                 <div class="col-12">
                   <label for="yourUsername" class="form-label">Stok</label>
@@ -161,34 +171,41 @@
             <div class="col-12">
               <label for="yourUsername" class="form-label">Pengarang</label>
               <div class="input-group has-validation">
-                <input type="text" class="form-control" id="edit_pengarang" required>
+                <input type="text" class="form-control" id="edit_pengarang">
               </div>
             </div> 
             <div class="col-12">
               <label for="yourUsername" class="form-label">Penerbit</label>
               <div class="input-group has-validation">
-                <input type="text" class="form-control" id="edit_penerbit" required>
+                <input type="text" class="form-control" id="edit_penerbit">
               </div>
             </div>     
             <div class="col-12">
               <label for="yourUsername" class="form-label">Isbn</label>
               <div class="input-group has-validation">
-                <input type="number" class="form-control" id="edit_isbn" required>
+                <input type="number" class="form-control" id="edit_isbn">
               </div>
             </div>  
             <div class="col-12">
               <label for="yourUsername" class="form-label">Tahun</label>
               <div class="input-group has-validation">
-                <input type="number" class="form-control" id="edit_tahun" required>
+                <input type="number" class="form-control" id="edit_tahun">
               </div>
             </div>  
             <div class="col-12">
-              <img id="preview_edit_sampul_buku"alt="Preview" style="width: 250px; height: auto;margin-top:10px;">
+              <img id="preview_edit_sampul_buku" alt="Preview sampul buku depan" style="width: 250px; height: auto;margin-top:10px;">
             </div>
             <div class="col-12">
-              <label for="inputPassword4" class="form-label">Sampul Buku</label>
+              <label for="inputPassword4" class="form-label">Sampul Buku Depan</label>
               <input type="file" class="form-control" onchange="PreviewEditSampulBuku()" id="edit_sampul_buku">
             </div>
+            <div class="col-12">
+              <img id="preview_edit_sampul_buku_belakang" alt="Preview sampul buku belakang" style="width: 250px; height: auto;margin-top:10px;">
+            </div>
+            <div class="col-12">
+              <label for="inputPassword4" class="form-label">Sampul Buku Belakang</label>
+              <input type="file" class="form-control" onchange="PreviewEditSampulBukuBelakang()" id="edit_sampul_buku_belakang">
+            </div>          
             <div class="col-12">
               <label for="yourUsername" class="form-label">Stok</label>
               <div class="input-group has-validation">
@@ -267,8 +284,13 @@
               </div>
             </div>  
             <div class="col-12">
-              <label for="inputPassword4" class="form-label">Sampul Buku</label>
+              <label for="inputPassword4" class="form-label">Sampul Buku Depan</label> <br>
               <img id="preview_detail_sampul_buku"alt="Preview" style="width: 250px; height: auto;margin-top:10px;">
+            </div>
+
+            <div class="col-12">
+              <label for="inputPassword4" class="form-label">Sampul Buku Belakang</label> <br>
+              <img id="preview_detail_sampul_buku_belakang"alt="Preview" style="width: 250px; height: auto;margin-top:10px;">
             </div>
             {{-- <div class="col-12">
               <label for="inputPassword4" class="form-label">Sampul Buku</label>
@@ -342,6 +364,38 @@
         reader.readAsDataURL(input.files[0]);
       }
     }
+
+
+    function previewSampulBukuBelakang() {
+      var input = document.getElementById('sampul_buku_belakang');
+      var preview = document.getElementById('preview_sampul_buku_belakang');
+  
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+  
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+        };
+  
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+    function PreviewEditSampulBukuBelakang() {
+      var input = document.getElementById('edit_sampul_buku_belakang');
+      var preview = document.getElementById('preview_edit_sampul_buku_belakang');
+  
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+  
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+        };
+  
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
   </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
@@ -356,6 +410,7 @@
             formData.append("isbn", $("#isbn").val());
             formData.append("tahun", $("#tahun").val());
             formData.append("sampul_buku", $("#sampul_buku")[0].files[0]); 
+            formData.append("sampul_buku_belakang", $("#sampul_buku_belakang")[0].files[0]); 
             formData.append("stok", $("#stok").val());
             formData.append("rak_id", $("#rak_id").val());
             formData.append("category_id", $("#category_id").val());
@@ -390,6 +445,7 @@
                      $("#edit_isbn").val(data.isbn);
                      $("#edit_tahun").val(data.tahun);
                      $("#preview_edit_sampul_buku").attr('src', '{{ asset('storage') }}' + '/' +  data.sampul_buku);
+                     $("#preview_edit_sampul_buku_belakang").attr('src', '{{ asset('storage') }}' + '/' +  data.sampul_buku_belakang);
                      $("#edit_stok").val(data.stok);
                      $("#edit_rak_id").val(data.rak_id);
                      $("#edit_category_id").val(data.category_id);
@@ -414,6 +470,11 @@
             var fileInput = document.getElementById('edit_sampul_buku');
             if (fileInput.files.length > 0) {
                 formData.append("sampul_buku", fileInput.files[0]);
+            }
+
+            var fileInputSampulBukuBelakang = document.getElementById('edit_sampul_buku_belakang');
+            if (fileInputSampulBukuBelakang.files.length > 0) {
+                formData.append("sampul_buku_belakang", fileInputSampulBukuBelakang.files[0]);
             }
             formData.append("stok", $("#edit_stok").val());
             formData.append("rak_id", $("#edit_rak_id").val());
@@ -469,6 +530,7 @@
                      $("#detail_isbn").val(data.isbn);
                      $("#detail_tahun").val(data.tahun);
                      $("#preview_detail_sampul_buku").attr('src', '{{ asset('storage') }}' + '/' +  data.sampul_buku);
+                     $("#preview_detail_sampul_buku_belakang").attr('src', '{{ asset('storage') }}' + '/' +  data.sampul_buku_belakang);
                      $("#detail_stok").val(data.stok);
                      $("#detail_rak_id").val(data.rak_id);
                      $("#detail_category_id").val(data.category_id);

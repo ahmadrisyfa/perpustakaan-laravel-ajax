@@ -24,11 +24,12 @@ class BukuController extends Controller
     {
         $validatedData = $request->validate([
             'judul' => 'required',
-            'pengarang' => 'required',
-            'penerbit' => 'required',
-            'isbn' => 'required',
-            'tahun' => 'required',
+            'pengarang' => 'nullable',
+            'penerbit' => 'nullable',
+            'isbn' => 'nullable',
+            'tahun' => 'nullable',
             'sampul_buku' => 'required|image',
+            'sampul_buku_belakang' => 'required|image',
             'stok' => 'required',
             'rak_id' => 'required',
             'category_id' => 'required',            
@@ -36,6 +37,9 @@ class BukuController extends Controller
 
         if ($request->hasFile('sampul_buku')) {
             $validatedData['sampul_buku'] = $request->file('sampul_buku')->store('img-foto-sampul-buku');
+        }
+        if ($request->hasFile('sampul_buku_belakang')) {
+            $validatedData['sampul_buku_belakang'] = $request->file('sampul_buku_belakang')->store('img-foto-sampul-buku');
         }
         Buku::create($validatedData);
 
@@ -58,11 +62,12 @@ class BukuController extends Controller
 
         $validatedData = $request->validate([
             'judul' => 'required',
-            'pengarang' => 'required',
-            'penerbit' => 'required',
-            'isbn' => 'required',
-            'tahun' => 'required',
+            'pengarang' => 'nullable',
+            'penerbit' => 'nullable',
+            'isbn' => 'nullable',
+            'tahun' => 'nullable',
             'sampul_buku' => '',
+            'sampul_buku_belakang' => '',        
             'stok' => 'required',
             'rak_id' => 'required',
             'category_id' => 'required',            
@@ -73,6 +78,13 @@ class BukuController extends Controller
                 Storage::delete($buku->sampul_buku);
             }
             $validatedData['sampul_buku'] = $request->file('sampul_buku')->store('img-foto-sampul-buku');
+        }
+
+        if ($request->hasFile('sampul_buku_belakang')) {
+            if ($buku->sampul_buku_belakang) {
+                Storage::delete($buku->sampul_buku_belakang);
+            }
+            $validatedData['sampul_buku_belakang'] = $request->file('sampul_buku_belakang')->store('img-foto-sampul-buku');
         }
 
         $buku->update($validatedData);
@@ -86,6 +98,9 @@ class BukuController extends Controller
         $buku = Buku::find($id); 
         if ($buku->sampul_buku) {
             Storage::delete($buku->sampul_buku);
+        }   
+        if ($buku->sampul_buku_belakang) {
+            Storage::delete($buku->sampul_buku_belakang);
         }       
         $buku->delete();
         return response()->json(['message' => 'Data deleted successfully']);

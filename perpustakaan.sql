@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 25, 2024 at 08:51 PM
+-- Generation Time: Jun 12, 2024 at 08:33 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -30,11 +30,12 @@ SET time_zone = "+00:00";
 CREATE TABLE `buku` (
   `id` bigint UNSIGNED NOT NULL,
   `judul` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pengarang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `penerbit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `isbn` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tahun` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pengarang` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `penerbit` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `isbn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tahun` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sampul_buku` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sampul_buku_belakang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `stok` int NOT NULL,
   `rak_id` bigint UNSIGNED NOT NULL,
   `category_id` bigint UNSIGNED NOT NULL,
@@ -47,22 +48,25 @@ CREATE TABLE `buku` (
 -- Dumping data for table `buku`
 --
 
-INSERT INTO `buku` (`id`, `judul`, `pengarang`, `penerbit`, `isbn`, `tahun`, `sampul_buku`, `stok`, `rak_id`, `category_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Recusandae Pariatur', 'Labore est tempor la', 'Architecto voluptati', '32', '74', 'img-foto-sampul-buku/lXzBMm8q10vB19MiwvQApVLjf7rpAdaqmIr4KDnu.jpg', 87, 1, 2, '2024-05-17 03:19:23', '2024-05-22 11:49:50', NULL),
-(2, 'Quis libero amet vi', 'Et sunt quis sit odi', 'Blanditiis ducimus', '100', '62', 'img-foto-sampul-buku/drCRw2jw3P861rgCM9Bqv9qzF0gcf8NKnqGqJ2JK.jpg', 2, 1, 2, '2024-05-17 03:20:59', '2024-05-22 11:50:05', NULL),
-(3, 'buku cerita', 'Impedit quis repreh', 'Esse sit alias mole', '33', '79', 'img-foto-sampul-buku/ZiVqIaK4vqpSupEytC1fNmIzlHx35xzgGjiL3VTo.jpg', 48, 1, 3, '2024-05-22 15:58:51', '2024-05-22 15:58:51', NULL),
-(4, 'buku dongeng', 'Est aliquid et quas', 'Fugit temporibus nu', '87', '39', 'img-foto-sampul-buku/8rTXzTSVEGk4fWV9WXZgv0cT1LzKlGJTxDCaFUGC.jpg', 69, 1, 3, '2024-05-22 15:59:11', '2024-05-22 15:59:11', NULL),
-(5, 'buku belajar', 'Aut nesciunt incidi', 'Provident est ipsa', '96', '42', 'img-foto-sampul-buku/q58NxiuDQlFp0lDV78orshsPBVpbdvMj5seYFcgy.jpg', 31, 1, 2, '2024-05-22 15:59:30', '2024-05-22 15:59:30', NULL),
-(6, 'Sed aliquam nemo con', 'Quia labore sed repe', 'Delectus non est re', '27', '43', 'img-foto-sampul-buku/1Gis449oSY9n9F0pWcrC06FF4SOlr0kzvPRt62dv.jpg', 48, 2, 2, '2024-05-23 07:10:12', '2024-05-23 07:10:12', NULL),
-(7, 'Aute id est quisqu', 'Quis cupiditate aliq', 'Maxime quidem beatae', '38', '42', 'img-foto-sampul-buku/myFgduNA10AObQlP1lQjOcqKG7SMNe8YaLZWz89I.jpg', 97, 1, 3, '2024-05-23 07:10:37', '2024-05-23 07:10:37', NULL),
-(8, 'Deserunt eos pariat', 'Dolorum ipsum repell', 'Consequatur Sit dol', '21', '12', 'img-foto-sampul-buku/AnqwsJO6nA7X3stv3H4RyOuts9Ax0ztKvutDd3sO.jpg', 66, 3, 3, '2024-05-23 07:11:13', '2024-05-23 07:11:13', NULL),
-(9, 'Fugiat doloribus es', 'Sunt facilis iure s', 'Veniam cum et iure', '14', '64', 'img-foto-sampul-buku/la90lKcPeUJMXZFpLjrlATVtTUQg8GLT8eftsUt3.jpg', 29, 3, 3, '2024-05-23 07:14:18', '2024-05-23 07:14:18', NULL),
-(10, 'Voluptatibus perfere', 'Tenetur incididunt e', 'Excepteur distinctio', '80', '89', 'img-foto-sampul-buku/0TTgIhWXR6CeUIRnxBnrdHMp6y3abhpbVXbpkgk6.jpg', 69, 1, 3, '2024-05-23 07:14:28', '2024-05-23 07:14:28', NULL),
-(11, 'Magni blanditiis ess', 'Aut est sed sint do', 'Corporis dignissimos', '9', '26', 'img-foto-sampul-buku/iiasA6Y3KAmCuN58NNWZT06ORcpUaUKVX9dsmjEg.jpg', 72, 1, 3, '2024-05-23 07:14:41', '2024-05-23 07:14:41', NULL),
-(12, 'Magni quae et dolore', 'Esse veniam ea aut', 'Cupidatat aliquip co', '37', '83', 'img-foto-sampul-buku/8lfkqPpZKs8H1FvtqNUGJ1BNWUVA6bsCAaMukeMu.jpg', 94, 2, 3, '2024-05-23 07:14:52', '2024-05-23 07:14:52', NULL),
-(13, 'Sunt laudantium al', 'Tempora corporis dol', 'Eaque cillum consequ', '45', '1', 'img-foto-sampul-buku/tHFRUBVohWBKrB793dcRCQVF4h5jS8l04RnStvM9.jpg', 10, 1, 3, '2024-05-23 07:15:04', '2024-05-23 07:15:04', NULL),
-(14, 'Molestiae atque exer', 'Ut est repudiandae', 'Ut nihil similique e', '21', '86', 'img-foto-sampul-buku/Vun1BDY20oe2UyHrjlhs68IRUmYreZ4loFpqnTj4.jpg', 77, 3, 3, '2024-05-23 07:15:17', '2024-05-23 07:15:17', NULL),
-(15, 'Similique et excepte', 'Ea rem sit nostrum v', 'Quo reprehenderit eo', '97', '30', 'img-foto-sampul-buku/YK4RNt5dRrgUQFzg88zpP70Aab3pv7yKc4jB59t4.jpg', 67, 2, 1, '2024-05-23 07:15:59', '2024-05-23 07:15:59', NULL);
+INSERT INTO `buku` (`id`, `judul`, `pengarang`, `penerbit`, `isbn`, `tahun`, `sampul_buku`, `sampul_buku_belakang`, `stok`, `rak_id`, `category_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Laskar Pelangi', 'Andrea Hirata', 'Architecto voluptati', '32', '74', 'img-foto-sampul-buku/lXzBMm8q10vB19MiwvQApVLjf7rpAdaqmIr4KDnu.jpg', 'img-foto-sampul-buku/PFFmHaGwo5BTavMAV7GOBncagoVEDDc6phpfDIOi.jpg', 87, 1, 2, '2024-05-17 03:19:23', '2024-06-12 12:50:52', NULL),
+(2, 'Bumi Manusia', 'Pramoedya Ananta Toer', 'Blanditiis ducimus', '100', '62', 'img-foto-sampul-buku/drCRw2jw3P861rgCM9Bqv9qzF0gcf8NKnqGqJ2JK.jpg', '', 2, 1, 2, '2024-05-17 03:20:59', '2024-05-30 07:21:05', NULL),
+(3, 'Marmut Merah Jambu', 'Raditya Dika', 'Esse sit alias mole', '33', '79', 'img-foto-sampul-buku/ZiVqIaK4vqpSupEytC1fNmIzlHx35xzgGjiL3VTo.jpg', '', 48, 1, 3, '2024-05-22 15:58:51', '2024-05-30 07:24:41', NULL),
+(4, 'Orang-Orang Biasa', 'Andrea Hirata', 'Fugit temporibus nu', '87', '39', 'img-foto-sampul-buku/8rTXzTSVEGk4fWV9WXZgv0cT1LzKlGJTxDCaFUGC.jpg', '', 69, 1, 3, '2024-05-22 15:59:11', '2024-05-30 07:24:58', NULL),
+(5, '9 Summers 10 Autumns', 'Iwan Setyawan', 'Provident est ipsa', '96', '42', 'img-foto-sampul-buku/q58NxiuDQlFp0lDV78orshsPBVpbdvMj5seYFcgy.jpg', '', 31, 1, 2, '2024-05-22 15:59:30', '2024-05-30 07:25:18', NULL),
+(6, 'Negeri 5 Menara', 'Ahmad Fuadi', 'Delectus non est re', '27', '43', 'img-foto-sampul-buku/1Gis449oSY9n9F0pWcrC06FF4SOlr0kzvPRt62dv.jpg', '', 48, 2, 2, '2024-05-23 07:10:12', '2024-05-30 07:21:48', NULL),
+(7, 'Hujan', 'Tere Liye', 'Maxime quidem beatae', '38', '42', 'img-foto-sampul-buku/myFgduNA10AObQlP1lQjOcqKG7SMNe8YaLZWz89I.jpg', '', 97, 1, 3, '2024-05-23 07:10:37', '2024-05-30 07:22:06', NULL),
+(8, 'Dilan: Dia adalah Dilanku Tahun 1990', 'Pidi Baiq', 'Consequatur Sit dol', '21', '12', 'img-foto-sampul-buku/AnqwsJO6nA7X3stv3H4RyOuts9Ax0ztKvutDd3sO.jpg', '', 66, 3, 3, '2024-05-23 07:11:13', '2024-05-30 07:22:30', NULL),
+(9, 'Filosofi Kopi', 'Dewi Lestari (Dee)', 'Veniam cum et iure', '14', '64', 'img-foto-sampul-buku/la90lKcPeUJMXZFpLjrlATVtTUQg8GLT8eftsUt3.jpg', '', 29, 3, 3, '2024-05-23 07:14:18', '2024-05-30 07:22:53', NULL),
+(10, 'Perahu Kertas', 'Dewi Lestari (Dee)', 'Excepteur distinctio', '80', '89', 'img-foto-sampul-buku/0TTgIhWXR6CeUIRnxBnrdHMp6y3abhpbVXbpkgk6.jpg', '', 69, 1, 3, '2024-05-23 07:14:28', '2024-05-30 07:23:19', NULL),
+(11, 'Manjali dan Cakrabirawa', 'Ayu Utami', 'Corporis dignissimos', '9', '26', 'img-foto-sampul-buku/iiasA6Y3KAmCuN58NNWZT06ORcpUaUKVX9dsmjEg.jpg', '', 72, 1, 3, '2024-05-23 07:14:41', '2024-05-30 07:26:11', NULL),
+(12, 'Raja, Penyair dan Tiga Perempuan', 'Kuntowijoyo', 'Cupidatat aliquip co', '37', '83', 'img-foto-sampul-buku/8lfkqPpZKs8H1FvtqNUGJ1BNWUVA6bsCAaMukeMu.jpg', '', 94, 2, 3, '2024-05-23 07:14:52', '2024-05-30 07:27:45', NULL),
+(13, 'Galaksi Kinanthi', 'Tasaro GK', 'Eaque cillum consequ', '45', '1', 'img-foto-sampul-buku/tHFRUBVohWBKrB793dcRCQVF4h5jS8l04RnStvM9.jpg', '', 10, 1, 3, '2024-05-23 07:15:04', '2024-05-30 07:27:23', NULL),
+(14, 'Rahvayana: Aku Lala Padamu', 'Sujiwo Tejo', 'Ut nihil similique e', '21', '86', 'img-foto-sampul-buku/Vun1BDY20oe2UyHrjlhs68IRUmYreZ4loFpqnTj4.jpg', '', 77, 3, 3, '2024-05-23 07:15:17', '2024-05-30 07:27:03', NULL),
+(15, 'Kerumunan Terakhir', 'Okky Madasari', 'Quo reprehenderit eo', '97', '30', 'img-foto-sampul-buku/YK4RNt5dRrgUQFzg88zpP70Aab3pv7yKc4jB59t4.jpg', '', 67, 2, 1, '2024-05-23 07:15:59', '2024-05-30 07:26:33', NULL),
+(16, '22', '22', '22', '22', '222', 'img-foto-sampul-buku/xkZVeRyW3Cq2Ghdh9lXVWWHhEWMgSM8WometewFh.jpg', '', 22, 1, 1, '2024-06-12 12:40:16', '2024-06-12 12:41:04', NULL),
+(17, 'Similique nostrud om', 'Est ut ipsa similiq', 'Sed irure officia do', '39', '19', 'img-foto-sampul-buku/AnCmNHEW6rIAzdqvCeN5rVSC9bK9g6dvyyDCKhGa.jpg', '', 3, 2, 1, '2024-06-12 12:41:28', '2024-06-12 12:41:28', NULL),
+(18, 'Molestias do commodo', 'Sed assumenda et ull', 'Amet neque nesciunt', '69', '16', 'img-foto-sampul-buku/0Kz7D636wFvCquXtLImSnewBwUZknfabxDdH5TUQ.jpg', 'img-foto-sampul-buku/OJZa2KENRgmuDFGPcMf3sGUrBUvvu6nvoaaaGZe4.jpg', 80, 3, 3, '2024-06-12 12:51:56', '2024-06-12 12:51:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -83,9 +87,9 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `nama`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Category 1', '2024-05-17 03:18:45', '2024-05-17 03:18:45', NULL),
-(2, 'Category 2', '2024-05-17 03:18:56', '2024-05-17 03:18:56', NULL),
-(3, 'category 3', '2024-05-22 15:58:26', '2024-05-22 15:58:26', NULL);
+(1, 'Novel', '2024-05-17 03:18:45', '2024-05-30 07:28:18', NULL),
+(2, 'Misteri', '2024-05-17 03:18:56', '2024-05-30 07:28:31', NULL),
+(3, 'Sains dan Teknologi', '2024-05-22 15:58:26', '2024-05-30 07:28:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -155,9 +159,9 @@ CREATE TABLE `murid` (
 --
 
 INSERT INTO `murid` (`id`, `nama`, `no_telepon`, `alamat`, `tanggal_lahir`, `jenis_kelamin`, `user_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Quis mollit incidunt', 'Sit quia facere des', 'Obcaecati repellendu', '1987-12-02', 'Perempuan', 2, '2024-05-17 03:21:15', '2024-05-17 03:21:15', NULL),
-(2, 'Et nihil velit offic', 'Reprehenderit aut si', 'Duis id quas ipsa s', '1973-08-27', 'Perempuan', 5, '2024-05-22 16:02:51', '2024-05-22 16:02:51', NULL),
-(3, 'Nesciunt ut ullamco', 'Voluptatem saepe mol', 'Eos maiores labore u', '1970-02-15', 'Laki-Laki', 3, '2024-05-22 16:02:57', '2024-05-22 16:02:57', NULL);
+(1, 'Budi Santoso', '38363383729', 'Voluptates sed proid', '1985-04-04', 'Laki-Laki', 4, '2024-05-17 03:21:15', '2024-05-30 07:19:25', NULL),
+(2, 'Taufik Hidayat', '627287282287', 'Duis id quas ipsa s', '1973-08-27', 'Perempuan', 5, '2024-05-22 16:02:51', '2024-05-30 07:18:54', NULL),
+(3, 'Siti Nurhaliza', '6829027262728290', 'Eos maiores labore u', '1970-02-15', 'Laki-Laki', 3, '2024-05-22 16:02:57', '2024-05-30 07:19:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -201,7 +205,8 @@ INSERT INTO `pengembalian_buku` (`id`, `buku_id`, `murid_id`, `jumlah_pinjam`, `
 (17, 3, 2, '39', '2016-02-17', '2016-02-24', '3012000', '17', '2024-05-23 13:34:07', '2024-05-23 14:56:57', NULL),
 (18, 11, 1, '77', '2002-11-14', '2002-11-21', '7855000', '0', '2024-05-23 13:34:19', '2024-05-23 14:57:56', NULL),
 (19, 11, 1, '42', '2024-05-24', '2024-05-31', '0', '0', '2024-05-23 13:34:30', '2024-05-23 13:34:30', NULL),
-(20, 13, 3, '77', '2024-05-01', '2024-05-08', '0', '0', '2024-05-23 14:16:26', '2024-05-23 14:16:26', NULL);
+(20, 13, 3, '77', '2024-05-01', '2024-05-08', '19000', '0', '2024-05-23 14:16:26', '2024-05-27 00:17:11', NULL),
+(23, 4, 2, '2', '2023-12-01', '2023-12-08', '0', '0', '2024-05-30 07:09:56', '2024-05-30 07:09:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -252,7 +257,9 @@ INSERT INTO `pinjam_buku` (`id`, `buku_id`, `murid_id`, `jumlah_pinjam`, `tangga
 (18, 11, 1, '77', '2002-11-14', '2002-11-21', '0', '1', '2024-05-23 13:33:32', '2024-05-23 13:34:18', NULL),
 (19, 11, 1, '42', '2024-05-24', '2024-05-31', '0', '1', '2024-05-23 13:33:42', '2024-05-23 13:34:30', NULL),
 (20, 13, 3, '77', '2024-05-01', '2024-05-08', '0', '1', '2024-05-23 14:16:19', '2024-05-23 14:16:26', NULL),
-(21, 1, 2, '90', '2024-05-24', '2024-05-31', '0', '0', '2024-05-23 14:34:36', '2024-05-24 12:36:03', NULL);
+(21, 1, 2, '90', '2024-05-24', '2024-05-31', '0', '0', '2024-05-23 14:34:36', '2024-05-24 12:36:03', '2024-05-24 12:36:03'),
+(22, 1, 1, '83', '2024-05-25', '2024-06-01', '0', '0', '2024-05-24 12:33:48', '2024-05-24 12:33:48', NULL),
+(23, 4, 2, '2', '2023-12-01', '2023-12-08', '0', '1', '2024-05-30 07:09:46', '2024-05-30 07:09:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -304,9 +311,9 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `is_admin`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Admin', 'admin@gmail.com', 1, NULL, '$2y$10$2Bx6qztdYPwhW.Dllh/6DuDcOObtCwbEcrF1eCXRBSv0M8gj2oztS', NULL, '2024-05-17 03:14:41', '2024-05-17 03:14:41', NULL),
 (2, 'User', 'user@gmail.com', 0, NULL, '$2y$10$AS/B.3Ksq.Qul.JCxzN7xOUZx2ho.fZPk.7EoUtmrJPHCEUhCovDu', NULL, '2024-05-17 03:14:41', '2024-05-17 03:14:41', NULL),
-(3, 'Venus Carver', 'fanagylatu@mailinator.com', 0, NULL, '$2y$10$5bPkvUPkys5yykIKXbKSF.rlUfMgsrmFGKYA2qirNhSgspxw0sP.S', NULL, '2024-05-22 16:00:18', '2024-05-22 16:00:18', NULL),
-(4, 'Malachi Yang', 'jolum@mailinator.com', 0, NULL, '$2y$10$svnn3rfUx6tStvqfMotX4.ZsOMh9.huzswgtzDNyW.4xDoOV0jHlm', NULL, '2024-05-22 16:00:31', '2024-05-22 16:00:31', NULL),
-(5, 'Colette Coleman', 'teny@mailinator.com', 0, NULL, '$2y$10$gNjlk7uPYUE3qW/XxWAB1ulTx7Yxw4qRuHQWPVtFjk2hgfdK.RoNq', NULL, '2024-05-22 16:00:39', '2024-05-22 16:00:39', NULL);
+(3, 'Siti Nurhaliza', 'fanagylatu@mailinator.com', 0, NULL, '$2y$10$LqRefl8K2OXkjWHzwcj7AO5SebahmC54bLFE4gR1KAzw7SDz9O1W.', NULL, '2024-05-22 16:00:18', '2024-05-30 07:17:18', NULL),
+(4, 'Budi Santoso', 'jolum@mailinator.com', 0, NULL, '$2y$10$HSP4UWT8eW.6TeNPL7LGUOuLEp1H1k8EOVmWVOitzLKK0Q7EJvb7y', NULL, '2024-05-22 16:00:31', '2024-05-30 07:17:35', NULL),
+(5, 'Taufik Hidayat', 'teny@mailinator.com', 0, NULL, '$2y$10$z.JeqZ2UqB/ug13Fq.MuJ.zHxirDy1JE6ve/XBua2jiVG2isNAyNC', NULL, '2024-05-22 16:00:39', '2024-05-30 07:17:55', NULL);
 
 --
 -- Indexes for dumped tables
@@ -397,7 +404,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `buku`
 --
 ALTER TABLE `buku`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -427,7 +434,7 @@ ALTER TABLE `murid`
 -- AUTO_INCREMENT for table `pengembalian_buku`
 --
 ALTER TABLE `pengembalian_buku`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

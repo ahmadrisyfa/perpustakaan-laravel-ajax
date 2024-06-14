@@ -80,7 +80,35 @@
             <div class="row justify-content-center">
                 <div class="col-md-10">
                     <article class="card">
-                    <img class="card-img-top mb-2" src="{{asset('storage/'.$buku_detail->sampul_buku)}}" alt="Card image">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img class="card-img-top mb-2" src="{{asset('storage/'.$buku_detail->sampul_buku)}}" alt="sampul buku depan">
+                                <div class="carousel-caption d-none d-md-block">
+                                   <h5 style="font-weight: bold;color:black">Sampul Buku Depan</h5>
+                                </div>                                
+                              </div>
+                              <div class="carousel-item">
+                                <img class="card-img-top mb-2" src="{{asset('storage/'.$buku_detail->sampul_buku_belakang)}}" alt="sampul buku belakang">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5 style="font-weight: bold;color:black">Sampul Buku Belakang</h5>
+                                </div> 
+                              </div>                              
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    {{-- <img class="card-img-top mb-2" src="{{asset('storage/'.$buku_detail->sampul_buku)}}" alt="Card image"> --}}
                     <div class="card-body">
                         <h1 class="card-title display-4 text-center" style="font-family:Courier;text-transform:capitalize">
                         {{$buku_detail->judul}} </h1>

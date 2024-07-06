@@ -27,12 +27,9 @@ Route::put('admin/pinjam_buku/update/{id}', [App\Http\Controllers\Api\PinjamBuku
 Route::delete('admin/pinjam_buku/delete/{id}', [App\Http\Controllers\Api\PinjamBukuController::class, 'destroy']);
 
 
-
-
-
-
 Route::get('admin/pengembalian_buku', [App\Http\Controllers\Api\PengembalianBukuController::class, 'index']);
 Route::post('admin/pengembalian_buku/create', [App\Http\Controllers\Api\PengembalianBukuController::class, 'store']);
 Route::get('admin/pengembalian_buku/show/{id}', [App\Http\Controllers\Api\PengembalianBukuController::class, 'show']);
 Route::put('admin/pengembalian_buku/update/{id}', [App\Http\Controllers\Api\PengembalianBukuController::class, 'update']);
-Route::delete('admin/pengembalian_buku/delete/{id}', [App\Http\Controllers\Api\PengembalianBukuController::class, 'destroy']);
+
+Route::get('siswa/show_buku/show/{id}', [App\Http\Controllers\Api\BukuController::class, 'show']);

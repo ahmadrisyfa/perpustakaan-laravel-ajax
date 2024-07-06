@@ -7,14 +7,14 @@ use App\Models\Murid;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
-class MuridController extends Controller
+class GuruController extends Controller
 {
     public function index()
     {
-        $murid = Murid::where('status','murid')->get();
-        $user = User::where('is_admin',0)->get();
+        $guru = murid::where('status','guru')->get();
+        $user = User::where('is_admin',2)->get();
 
-        return view('admin.murid.index',compact('murid','user'));
+        return view('admin.guru.index',compact('guru','user'));
     }
 
     public function store(Request $request)
@@ -25,7 +25,7 @@ class MuridController extends Controller
             'alamat' => 'required',
             'tanggal_lahir' => 'required',
             'jenis_kelamin' => 'required',
-            'user_id' => 'required',            
+            'user_id' => 'required',   
             'status' => 'required',            
         ]);        
 
@@ -40,7 +40,7 @@ class MuridController extends Controller
     }
     public function update($id, Request $request)
     {
-        $murid = Murid::findOrFail($id); 
+        $guru = Murid::findOrFail($id); 
 
 
         $validatedData = $request->validate([
@@ -53,7 +53,7 @@ class MuridController extends Controller
         ]);   
         
 
-        $murid->update($validatedData);
+        $guru->update($validatedData);
 
         return response()->json(['message' => 'Data Updated successfully']);
     }
@@ -61,8 +61,8 @@ class MuridController extends Controller
     
     public function destroy($id)
     {
-        $murid = Murid::find($id);        
-        $murid->delete();
+        $guru = Murid::find($id);        
+        $guru->delete();
         return response()->json(['message' => 'Data deleted successfully']);
     }
 }

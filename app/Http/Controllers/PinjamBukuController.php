@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\PinjamBuku;
 use App\Models\Murid;
 use App\Models\Buku;
+use App\Models\Guru;
 use Illuminate\Support\Facades\Storage;
 use GuzzleHttp\Client;
 
@@ -24,9 +25,10 @@ class PinjamBukuController extends Controller
             return $item['status'] == 0;
         });
         $buku = Buku::get();
-        $murid = Murid::get();
+        $murid = Murid::where('status','murid')->get();
+        $guru = Murid::where('status','guru')->get();
 
-        return view('admin.pinjam_buku.index', ['pinjam_buku' => $pinjam_buku, 'buku' => $buku, 'murid' => $murid]);
+        return view('admin.pinjam_buku.index', ['pinjam_buku' => $pinjam_buku, 'buku' => $buku, 'murid' => $murid, 'guru' => $guru]);
     }
 
     public function show($id)

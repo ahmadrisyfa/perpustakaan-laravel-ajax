@@ -15,7 +15,7 @@
 <div class="col-12">
     <div class="card recent-sales overflow-auto">
       <div class="card-body">
-        <h5 class="card-title">Data Murid <span>| Tambahkan Data</span></h5>
+        <h5 class="card-title">Data Guru <span>| Tambahkan Data</span></h5>
         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">
           Tambah Data</button>
         <table class="table table-borderless datatable">
@@ -32,7 +32,7 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($murid as $value)                
+            @foreach ($guru as $value)                
             <tr>
                 <th scope="row">{{$loop->iteration}}</th>     
                 <td>{{$value->nama}}</td>  
@@ -63,12 +63,12 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Tambah Data Murid</h5>
+          <h5 class="modal-title">Tambah Data Guru</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form id="createForm" >
-            <input type="hidden" name="status" value="murid">
+            <input type="hidden" class="form-control" id="status" value="guru" required>
                 <div class="col-12">
                   <label for="yourUsername" class="form-label">Nama</label>
                   <div class="input-group has-validation">
@@ -98,7 +98,7 @@
                   </div>
                 </div> 
                 <div class="col-12">
-                  <span style="color: red">*jika data user tidak ada maka sudah di pakai oleh murid lain atau statusnya tidak murid</span><br>
+                  <span style="color: red">*jika data user tidak ada maka sudah di pakai oleh siswa lain atau statusnya tidak guru</span><br>
                   <label for="yourUsername" class="form-label">User</label>
                   <div class="input-group has-validation">
                     <Select required class="form-control" id="user_id">
@@ -106,7 +106,7 @@
                         @foreach ($user as $value)
                             @php
                                 $user_id = App\Models\Murid::where('user_id', $value->id)->exists();
-                                // Cek sudah ada data user_id atau belum di tabel murid
+                                // Cek sudah ada data user_id atau belum di tabel Guru
                             @endphp
                             @if (!$user_id)
                                 <option value="{{$value->id}}">{{$value->name}}</option>
@@ -136,7 +136,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Edit Data Murid</h5>
+          <h5 class="modal-title">Edit Data Guru</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -172,20 +172,14 @@
                   </div> 
                   <div class="col-12">
                     {{-- <span style="color: red">*jika data user tidak ada maka sudah di pakai oleh siswa lain</span><br> --}}
-                    <span style="color: red">*1 murid hanya boleh mempunyai 1 user</span> <br>
+                    <span style="color: red">*1 Guru hanya boleh mempunyai 1 user</span> <br>
                     <label for="yourUsername" class="form-label">User</label>
                     <div class="input-group has-validation">
                       <Select required class="form-control" id="edit_user_id">
                         <option value="" style="text-align: center" selected disabled>-- Silahkan Pilih User --</option>
-                        @foreach ($user as $value)
-                            @php
-                                $user_id = App\Models\Murid::where('user_id', $value->id)->exists();
-                                // Cek sudah ada data user_id atau belum di tabel murid
-                            @endphp
-                            @if (!$user_id)
-                                <option value="{{$value->id}}">{{$value->name}}</option>
-                            @endif
-                        @endforeach                    
+                          @foreach ($user as $value)                            
+                                  <option value="{{$value->id}}">{{$value->name}}</option>
+                          @endforeach                    
                       </Select>
                     </div>
                   </div> 
@@ -221,9 +215,11 @@
             formData.append("tanggal_lahir", $("#tanggal_lahir").val());          
             formData.append("jenis_kelamin", $("#jenis_kelamin").val());          
             formData.append("user_id", $("#user_id").val());          
+            formData.append("status", $("#status").val());          
+
 
             $.ajax({
-                url: '{{ url('admin/murid/create') }}',
+                url: '{{ url('admin/guru/create') }}',
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -241,7 +237,7 @@
             event.preventDefault();
             var id = $(this).data('id');
             $.ajax({
-                url: '{{ url('admin/murid/edit') }}/' + id,
+                url: '{{ url('admin/guru/edit') }}/' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
@@ -271,7 +267,7 @@
             formData.append("jenis_kelamin", $("#edit_jenis_kelamin").val());          
             formData.append("user_id", $("#edit_user_id").val());          
             $.ajax({
-                url: '{{ url('admin/murid/update') }}/' + id,
+                url: '{{ url('admin/guru/update') }}/' + id,
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -290,7 +286,7 @@
             var id = $(this).data('id');
             if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
                 $.ajax({
-                    url: '{{ url('admin/murid/destroy') }}/' + id,
+                    url: '{{ url('admin/guru/destroy') }}/' + id,
                     type: 'get',
                     data: {
                         "_token": "{{ csrf_token() }}"

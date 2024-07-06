@@ -95,6 +95,22 @@
             </div>
 
             <div class="col-xxl-4 col-md-4">
+                <div class="card info-card sales-card">                
+                    <div class="card-body">
+                    <h5 class="card-title">Data Guru <span>| Today</span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-person"></i>
+                        </div>
+                        <div class="ps-3">
+                        <h6>{{$guru}}</h6>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-4 col-md-4">
                 <div class="card info-card customers-card">                
                     <div class="card-body">
                     <h5 class="card-title">Data Pinjam Buku <span>| Today</span></h5>

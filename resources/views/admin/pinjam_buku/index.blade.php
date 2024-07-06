@@ -37,7 +37,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Buku</th>
-              <th scope="col">Murid</th>          
+              <th scope="col">Murid Atau Guru</th>          
               <th scope="col">Jumlah Pinjam</th>             
               <th scope="col">Tanggal Pinjam</th>             
               <th scope="col">Batas Di Kembalikan</th>             
@@ -54,7 +54,11 @@
             <tr>
                 <th scope="row">{{$loop->iteration}}</th>     
                 <td>{{ $value['buku']['judul'] }}</td>
-                <td>{{ $value['murid']['nama'] }}</td>
+                @if ($value['murid']['status'] == 'guru')
+                  <td>{{ $value['murid']['nama'] }} (guru)</td> 
+                  @else
+                  <td>{{ $value['murid']['nama'] }} (murid)</td> 
+                @endif
                 <td>{{$value['jumlah_pinjam']}}</td>                
                 <td>{{$value['tanggal_pinjam']}}</td>                
                 <td>{{$value['tanggal_di_kembalikan']}}</td>  
@@ -204,9 +208,13 @@
               <label for="yourUsername" class="form-label">Murid</label>
               <div class="input-group has-validation">
                 <select name="murid_id" id="murid_id" required class="form-select">
-                  <option value="" selected disabled style="text-align:center">-- Silahkan Pilih Daftar Murid --</option>
+                  <option value="" selected disabled style="text-align:center">-- Silahkan Pilih Daftar Murid Atau guru --</option>
                   @foreach ($murid as $daftar_murid)
-                  <option value="{{$daftar_murid->id}}">{{$daftar_murid->nama}}</option>
+                  <option value="{{$daftar_murid->id}}">{{$daftar_murid->nama}} (Murid)</option>
+                  @endforeach
+                  <option value="" disabled>-----------------</option>
+                  @foreach ($guru as $daftar_guru)
+                  <option value="{{$daftar_guru->id}}">{{$daftar_guru->nama}} (Guru)</option>
                   @endforeach
                 </select>
               </div>

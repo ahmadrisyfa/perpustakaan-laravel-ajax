@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('murid', function (Blueprint $table) {
+        Schema::create('murid_atau_guru', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
             $table->string('no_telepon');
             $table->string('alamat');
             $table->string('tanggal_lahir');
             $table->string('jenis_kelamin');
+            $table->string('status');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->softDeletes();

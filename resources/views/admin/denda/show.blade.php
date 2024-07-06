@@ -18,12 +18,16 @@
       <div class="col-lg-6">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Data Murid</h5>            
+            @if ($pengembalian_buku['murid']['status'] == 'guru')
+              <h5 class="card-title">Data Guru</h5>            
+              @else
+              <h5 class="card-title">Data Murid</h5>            
+            @endif           
             <div>
               <div class="row mb-3">
                 <label for="inputEmail3" class="col-sm-4 col-form-label">Nama:</label>
                 <div class="col-sm-8">                
-                  <b>{{ $pengembalian_buku['murid']['nama'] }}</b>
+                  <b>{{ $pengembalian_buku['murid']['nama'] }} ({{ $pengembalian_buku['murid']['status'] }})</b>
                 </div>
               </div>
               <div class="row mb-3">

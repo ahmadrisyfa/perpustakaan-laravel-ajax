@@ -8,7 +8,13 @@ use App\Models\Category;
 use App\Models\Buku;
 use App\Models\User;
 use App\Models\Murid;
+use App\Models\PinjamBuku;
 use GuzzleHttp\Client;
+
+use App\Mail\KirimEmailPengembalianBuku;
+use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -42,9 +48,28 @@ class DashboardController extends Controller
         $category = Category::count();
         $buku = Buku::count();
         $user = User::count();
-        $murid = Murid::count();
+        $murid = Murid::where('status','murid')->count();
+        $guru = Murid::where('status','guru')->count();
+
+
+        // kirim email
+        $besok = Carbon::now()->addDay()->format('Y-m-d');
+        $peminjaman = $data = PinjamBuku::where('status',0)->whereDate('tanggal_di_kembalikan', $besok)
+                        ->get();
+        foreach ($peminjaman as $pinjam) {
+            $murid_kirim = Murid::where('id', $pinjam->murid_id)->first();
+            $user_kirim =  User::where('id', $murid_kirim->user_id)->first();
+            $nama_buku = $pinjam->buku->judul;
+            $tanggal_di_kembalikan = $pinjam->tanggal_di_kembalikan; 
+            $nama_murid_atau_guru = $pinjam->murid->nama;
+
+            if ($user_kirim) {
+                Mail::to($user_kirim->email)->send(new KirimEmailPengembalianBuku($user_kirim->email, $nama_buku, $tanggal_di_kembalikan, $nama_murid_atau_guru));
+            }
+        }
+
         
-        return view('admin.dashboard.index', compact('rak', 'category', 'buku', 'user', 'murid','jumlah_pinjam_buku','jumlah_pinjam_buku_belum_di_kembalikan','jumlah_pengembalian_buku'));
+        return view('admin.dashboard.index', compact('rak', 'category', 'buku', 'user', 'murid','jumlah_pinjam_buku','jumlah_pinjam_buku_belum_di_kembalikan','jumlah_pengembalian_buku','guru'));
     }
 
     public function daftar_buku()

@@ -41,7 +41,7 @@
                         <tr>
                           {{-- <th scope="col">#</th> --}}
                           <th scope="col">Buku</th>
-                          <th scope="col">Murid</th>          
+                          <th scope="col">Murid Atau Guru</th>          
                           <th scope="col">Jumlah Pinjam</th>             
                           {{-- <th scope="col">Tanggal Pinjam</th>             
                           <th scope="col">Batas Di Kembalikan</th>              --}}
@@ -84,7 +84,11 @@
                             <tr>
                                 {{-- <th scope="row">{{$loop->iteration}}</th>      --}}
                                 <td>{{ $value['buku']['judul'] }}</td>
-                                <td>{{ $value['murid']['nama'] }}</td>
+                                @if ($value['murid']['status'] == 'guru')
+                                  <td>{{ $value['murid']['nama'] }} (guru)</td> 
+                                  @else
+                                  <td>{{ $value['murid']['nama'] }} (murid)</td> 
+                                @endif
                                 <td>{{$value['jumlah_pinjam']}}</td>                
                                 {{-- <td>{{$value['tanggal_pinjam']}}</td>                
                                 <td>{{$value['tanggal_di_kembalikan']}}</td>   --}}
@@ -135,7 +139,7 @@
                         <tr>
                           {{-- <th scope="col">#</th> --}}
                           <th scope="col">Buku</th>
-                          <th scope="col">Murid</th>          
+                          <th scope="col">Murid Atau Guru</th>          
                           <th scope="col">Jumlah Pinjam</th>             
                           {{-- <th scope="col">Tanggal Pinjam</th>             
                           <th scope="col">Batas Di Kembalikan</th>              --}}
@@ -175,7 +179,11 @@
                             <tr>
                                 {{-- <th scope="row">{{$loop->iteration}}</th>      --}}
                                 <td>{{ $value['buku']['judul'] }}</td>
-                                <td>{{ $value['murid']['nama'] }}</td>
+                                @if ($value['murid']['status'] == 'guru')
+                                  <td>{{ $value['murid']['nama'] }} (guru)</td> 
+                                  @else
+                                  <td>{{ $value['murid']['nama'] }} (murid)</td> 
+                                @endif
                                 <td>{{$value['jumlah_pinjam']}}</td>                
                                 {{-- <td>{{$value['tanggal_pinjam']}}</td>                
                                 <td>{{$value['tanggal_di_kembalikan']}}</td>   --}}

@@ -10,7 +10,7 @@ class Murid extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = ['id'];
-    protected $table = 'murid';
+    protected $table = 'murid_atau_guru';
 
     public function user()
     {

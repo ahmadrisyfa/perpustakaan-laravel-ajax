@@ -33,6 +33,7 @@ Route::get('/daftar_buku/search', [App\Http\Controllers\DashboardController::cla
 
 
 
+
 // Route siswa
 Route::group(['middleware' => ['auth']], function () {
     Route::get('siswa/dashboard', [App\Http\Controllers\SiswaController::class, 'detail_siswa']);
@@ -86,7 +87,12 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::post('admin/murid/update/{id}', [App\Http\Controllers\MuridController::class, 'update']);
     Route::get('admin/murid/destroy/{id}', [App\Http\Controllers\MuridController::class, 'destroy']);
 
-
+    Route::get('admin/guru', [App\Http\Controllers\GuruController::class, 'index']);
+    Route::post('admin/guru/create', [App\Http\Controllers\GuruController::class, 'store']);
+    Route::get('admin/guru/detail/{id}', [App\Http\Controllers\GuruController::class, 'show']);
+    Route::get('admin/guru/edit/{id}', [App\Http\Controllers\GuruController::class, 'edit']);
+    Route::post('admin/guru/update/{id}', [App\Http\Controllers\GuruController::class, 'update']);
+    Route::get('admin/guru/destroy/{id}', [App\Http\Controllers\GuruController::class, 'destroy']);
     
     Route::get('admin/denda', [App\Http\Controllers\DendaController::class, 'index']);
     Route::get('admin/denda/show/{id}', [App\Http\Controllers\DendaController::class, 'show']);

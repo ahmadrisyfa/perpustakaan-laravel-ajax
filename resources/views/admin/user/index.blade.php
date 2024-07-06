@@ -37,8 +37,10 @@
                 <td>
                   @if($value->is_admin == 1)
                     <span class="btn btn-info">Admin</span>
-                    @else
+                    @elseif($value->is_admin == 0)
                     <span class="btn btn-primary">Siswa</span>
+                    @else
+                    <span class="btn btn-warning">Guru</span>
                   @endif
                 </td>                 
                 <td>
@@ -94,6 +96,7 @@
                         <option value="" style="text-align: center" selected disabled>-- Silahkan Pilih Status --</option>
                           <option value="1">Admin</option>
                           <option value="0">Siswa</option>
+                          <option value="2">Guru</option>
                       </Select>
                     </div>
                 </div>
@@ -143,6 +146,7 @@
                         <option value="" style="text-align: center" selected disabled>-- Silahkan Pilih Status --</option>
                           <option value="1">Admin</option>
                           <option value="0">Siswa</option>
+                          <option value="2">Guru</option>
                       </Select>
                     </div>
                 </div>                                                   

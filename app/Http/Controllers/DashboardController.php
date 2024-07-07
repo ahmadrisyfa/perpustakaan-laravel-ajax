@@ -9,6 +9,7 @@ use App\Models\Buku;
 use App\Models\User;
 use App\Models\Murid;
 use App\Models\PinjamBuku;
+use App\Models\KirimEmail;
 use GuzzleHttp\Client;
 
 use App\Mail\KirimEmailPengembalianBuku;
@@ -53,9 +54,11 @@ class DashboardController extends Controller
 
 
         // kirim email
-        $besok = Carbon::now()->addDay()->format('Y-m-d');
-        $peminjaman = $data = PinjamBuku::where('status',0)->whereDate('tanggal_di_kembalikan', $besok)
-                        ->get();
+        $besok = Carbon::now()->setTimezone('Asia/Jakarta')->addDay()->format('Y-m-d');
+        $peminjaman = PinjamBuku::where('status', 0)
+            ->whereDate('tanggal_di_kembalikan', $besok)
+            ->get();
+
         foreach ($peminjaman as $pinjam) {
             $murid_kirim = Murid::where('id', $pinjam->murid_id)->first();
             $user_kirim =  User::where('id', $murid_kirim->user_id)->first();
@@ -63,10 +66,18 @@ class DashboardController extends Controller
             $tanggal_di_kembalikan = $pinjam->tanggal_di_kembalikan; 
             $nama_murid_atau_guru = $pinjam->murid->nama;
 
-            if ($user_kirim) {
+            // Periksa apakah email sudah dikirim sebelumnya
+            $alreadySent = KirimEmail::where('peminjaman_id', $pinjam->id)->exists();
+
+            if ($user_kirim && !$alreadySent) {
+                // Kirim email
                 Mail::to($user_kirim->email)->send(new KirimEmailPengembalianBuku($user_kirim->email, $nama_buku, $tanggal_di_kembalikan, $nama_murid_atau_guru));
+
+                // Tambahkan ke tabel kirim_email
+                KirimEmail::create(['peminjaman_id' => $pinjam->id]);
             }
         }
+
 
         
         return view('admin.dashboard.index', compact('rak', 'category', 'buku', 'user', 'murid','jumlah_pinjam_buku','jumlah_pinjam_buku_belum_di_kembalikan','jumlah_pengembalian_buku','guru'));

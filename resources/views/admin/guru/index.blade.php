@@ -40,7 +40,10 @@
                 <td>{{$value->alamat}}</td>                 
                 <td>{{$value->tanggal_lahir}}</td>                 
                 <td>{{$value->jenis_kelamin}}</td>                 
-                <td>{{$value->user->name}}</td>                 
+                <td>{{ $value->user->name ?? 'Nama tidak tersedia' }}</td>
+
+
+              
                 <td>
                   <button class="btn btn-info edit-button"  data-id="{{ $value->id }}" data-bs-toggle="modal"
                     data-bs-target="#editModal"><i class="bi bi-pencil"></i> Edit</button>
@@ -98,7 +101,7 @@
                   </div>
                 </div> 
                 <div class="col-12">
-                  <span style="color: red">*jika data user tidak ada maka sudah di pakai oleh siswa lain atau statusnya tidak guru</span><br>
+                  <span style="color: red">*jika data user tidak ada maka sudah di pakai oleh guru lain atau statusnya tidak guru</span><br>
                   <label for="yourUsername" class="form-label">User</label>
                   <div class="input-group has-validation">
                     <Select required class="form-control" id="user_id">

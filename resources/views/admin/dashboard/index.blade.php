@@ -127,7 +127,7 @@
             </div>
 
 
-            <div class="col-xxl-6 col-xl-6">
+            <div class="col-xxl-4 col-xl-4">
                 <div class="card info-card revenue-card">                
                     <div class="card-body">
                     <h5 class="card-title">Data Pengembalian Buku <span>| Today</span></h5>
@@ -143,7 +143,7 @@
                 </div>
             </div>
 
-            <div class="col-xxl-6 col-xl-6">
+            <div class="col-xxl-4 col-xl-4">
                 <div class="card info-card sales-card">                
                     <div class="card-body">
                     <h5 class="card-title">Data Pinjam Buku (Belum Di Kembalikan)<span>| Today</span></h5>

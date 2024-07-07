@@ -40,7 +40,8 @@
                 <td>{{$value->alamat}}</td>                 
                 <td>{{$value->tanggal_lahir}}</td>                 
                 <td>{{$value->jenis_kelamin}}</td>                 
-                <td>{{$value->user->name}}</td>                 
+                <td>{{ $value->user->name ?? 'Nama tidak tersedia' }}</td>
+          
                 <td>
                   <button class="btn btn-info edit-button"  data-id="{{ $value->id }}" data-bs-toggle="modal"
                     data-bs-target="#editModal"><i class="bi bi-pencil"></i> Edit</button>

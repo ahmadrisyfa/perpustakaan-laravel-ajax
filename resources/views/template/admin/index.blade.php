@@ -452,7 +452,8 @@
 
 <main id="main" class="main">
     @yield('content_admin')
-</main><!-- End #main -->
+</main>
+<!-- End #main -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
